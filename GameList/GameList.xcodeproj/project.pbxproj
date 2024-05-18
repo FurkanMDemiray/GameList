@@ -20,6 +20,8 @@
 		DD66511B2BF90F6300E4FA4A /* GameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD66511A2BF90F6300E4FA4A /* GameCell.xib */; };
 		DD66511C2BF90F6300E4FA4A /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651192BF90F6300E4FA4A /* GameCell.swift */; };
 		DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */; };
+		DD6651212BF9288C00E4FA4A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DD6651202BF9288C00E4FA4A /* SDWebImage */; };
+		DD6651232BF9288C00E4FA4A /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD6651222BF9288C00E4FA4A /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6651232BF9288C00E4FA4A /* SDWebImageMapKit in Frameworks */,
+				DD6651212BF9288C00E4FA4A /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +173,8 @@
 			);
 			name = GameList;
 			packageProductDependencies = (
+				DD6651202BF9288C00E4FA4A /* SDWebImage */,
+				DD6651222BF9288C00E4FA4A /* SDWebImageMapKit */,
 			);
 			productName = GameList;
 			productReference = DD6650EE2BF7F60A00E4FA4A /* GameList.app */;
@@ -199,6 +205,7 @@
 			);
 			mainGroup = DD6650E52BF7F60A00E4FA4A;
 			packageReferences = (
+				DD66511F2BF9288C00E4FA4A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = DD6650EF2BF7F60A00E4FA4A /* Products */;
 			projectDirPath = "";
@@ -457,6 +464,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD66511F2BF9288C00E4FA4A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD6651202BF9288C00E4FA4A /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD66511F2BF9288C00E4FA4A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		DD6651222BF9288C00E4FA4A /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD66511F2BF9288C00E4FA4A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DD6650FA2BF7F60A00E4FA4A /* GameList.xcdatamodeld */ = {

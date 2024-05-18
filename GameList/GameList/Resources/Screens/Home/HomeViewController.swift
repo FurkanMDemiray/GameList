@@ -9,16 +9,18 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var gameImage: UIImageView!
-    var games: GameModel?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setGradientBackground()
-    }
+    var games: GameModel?
+    var results: [Results]?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UINib(nibName: "GameCell", bundle: nil), forCellWithReuseIdentifier: "GameCell")
+        setGradientBackground()
         configureGameImage()
         Task {
             await fetchGames()
@@ -34,6 +36,7 @@ class HomeViewController: UIViewController {
         do {
             let games = try await NetworkManager.shared.fetch(from: NetworkManager.shared.url, as: GameModel.self)
             self.games = games
+            self.results = games.results
             DispatchQueue.main.async {
                 for game in games.results! {
                     if let name = game.name {
@@ -41,6 +44,7 @@ class HomeViewController: UIViewController {
                     }
                 }
                 self.gameImage.downloaded(from: games.results![0].backgroundImage ?? "")
+                self.collectionView.reloadData()
             }
         } catch {
             print(error)
@@ -57,6 +61,20 @@ class HomeViewController: UIViewController {
         gradientLayer.frame = self.view.bounds
 
         self.view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
+}
+
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return games?.results?.count ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCell
+        cell.configureCell(with: games!.results![indexPath.row])
+        return cell
     }
 
 }
