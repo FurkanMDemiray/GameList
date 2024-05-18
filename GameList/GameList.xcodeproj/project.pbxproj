@@ -22,6 +22,8 @@
 		DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */; };
 		DD6651212BF9288C00E4FA4A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DD6651202BF9288C00E4FA4A /* SDWebImage */; };
 		DD6651232BF9288C00E4FA4A /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD6651222BF9288C00E4FA4A /* SDWebImageMapKit */; };
+		DD66512A2BF92E3800E4FA4A /* OldGameFatty.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */; };
+		DD66513D2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD66513C2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		DD6651192BF90F6300E4FA4A /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		DD66511A2BF90F6300E4FA4A /* GameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCell.xib; sourceTree = "<group>"; };
 		DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToColorExtension.swift; sourceTree = "<group>"; };
+		DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OldGameFatty.ttf; sourceTree = "<group>"; };
+		DD66513C2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PermanentMarker-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 		DD6651152BF9075B00E4FA4A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DD6651242BF92CC000E4FA4A /* Fonts */,
 				DD6651172BF90C8300E4FA4A /* Network */,
 				DD6651162BF9078E00E4FA4A /* Extensions */,
 				DD6651112BF9071A00E4FA4A /* Screens */,
@@ -154,6 +159,15 @@
 				DD66511A2BF90F6300E4FA4A /* GameCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DD6651242BF92CC000E4FA4A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DD66513C2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf */,
+				DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,9 +235,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD66512A2BF92E3800E4FA4A /* OldGameFatty.ttf in Resources */,
 				DD6650FE2BF7F60C00E4FA4A /* Assets.xcassets in Resources */,
 				DD6651012BF7F60C00E4FA4A /* Base in Resources */,
 				DD6650F92BF7F60A00E4FA4A /* Base in Resources */,
+				DD66513D2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf in Resources */,
 				DD66511B2BF90F6300E4FA4A /* GameCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,7 +337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -378,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

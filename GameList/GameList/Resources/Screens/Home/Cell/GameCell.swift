@@ -16,6 +16,8 @@ class GameCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        nameLabel.font = UIFont(name: "PermanentMarker-Regular", size: 18)
+        ratingReleaseLabel.font = UIFont(name: "OldGameFatty", size: 16)
         configureGameImage()
     }
 
@@ -27,7 +29,7 @@ class GameCell: UICollectionViewCell {
 
     func configureCell(with game: Results) {
         nameLabel.text = game.name
-        ratingReleaseLabel.text = "\(game.rating ?? 0.0) - \(game.released ?? "")"
+        ratingReleaseLabel.text = "\(game.rating ?? 0.0)  \(game.released ?? "")"
         gameImage.sd_imageIndicator = SDWebImageActivityIndicator.white
         gameImage.sd_setImage(with: URL(string: game.backgroundImage ?? ""))
     }
