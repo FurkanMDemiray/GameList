@@ -16,8 +16,10 @@
 		DD6651012BF7F60C00E4FA4A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DD6651002BF7F60C00E4FA4A /* Base */; };
 		DD6651092BF7F63000E4FA4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651082BF7F63000E4FA4A /* NetworkManager.swift */; };
 		DD66510B2BF80A1100E4FA4A /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66510A2BF80A1100E4FA4A /* GameModel.swift */; };
-		DD66510E2BF80D4600E4FA4A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DD66510D2BF80D4600E4FA4A /* Alamofire */; };
 		DD6651102BF816F500E4FA4A /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66510F2BF816F500E4FA4A /* ImageViewExtension.swift */; };
+		DD66511B2BF90F6300E4FA4A /* GameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD66511A2BF90F6300E4FA4A /* GameCell.xib */; };
+		DD66511C2BF90F6300E4FA4A /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651192BF90F6300E4FA4A /* GameCell.swift */; };
+		DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,9 @@
 		DD6651082BF7F63000E4FA4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DD66510A2BF80A1100E4FA4A /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		DD66510F2BF816F500E4FA4A /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
+		DD6651192BF90F6300E4FA4A /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		DD66511A2BF90F6300E4FA4A /* GameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCell.xib; sourceTree = "<group>"; };
+		DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD66510E2BF80D4600E4FA4A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +89,7 @@
 		DD6651122BF9072100E4FA4A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DD6651182BF90F4800E4FA4A /* Cell */,
 				DD6650F52BF7F60A00E4FA4A /* HomeViewController.swift */,
 				DD66510A2BF80A1100E4FA4A /* GameModel.swift */,
 			);
@@ -125,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				DD66510F2BF816F500E4FA4A /* ImageViewExtension.swift */,
+				DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -135,6 +141,15 @@
 				DD6651082BF7F63000E4FA4A /* NetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		DD6651182BF90F4800E4FA4A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD6651192BF90F6300E4FA4A /* GameCell.swift */,
+				DD66511A2BF90F6300E4FA4A /* GameCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +169,6 @@
 			);
 			name = GameList;
 			packageProductDependencies = (
-				DD66510D2BF80D4600E4FA4A /* Alamofire */,
 			);
 			productName = GameList;
 			productReference = DD6650EE2BF7F60A00E4FA4A /* GameList.app */;
@@ -185,7 +199,6 @@
 			);
 			mainGroup = DD6650E52BF7F60A00E4FA4A;
 			packageReferences = (
-				DD66510C2BF80D4500E4FA4A /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = DD6650EF2BF7F60A00E4FA4A /* Products */;
 			projectDirPath = "";
@@ -204,6 +217,7 @@
 				DD6650FE2BF7F60C00E4FA4A /* Assets.xcassets in Resources */,
 				DD6651012BF7F60C00E4FA4A /* Base in Resources */,
 				DD6650F92BF7F60A00E4FA4A /* Base in Resources */,
+				DD66511B2BF90F6300E4FA4A /* GameCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +231,10 @@
 				DD6650F62BF7F60A00E4FA4A /* HomeViewController.swift in Sources */,
 				DD6651102BF816F500E4FA4A /* ImageViewExtension.swift in Sources */,
 				DD6650F22BF7F60A00E4FA4A /* AppDelegate.swift in Sources */,
+				DD66511C2BF90F6300E4FA4A /* GameCell.swift in Sources */,
 				DD6651092BF7F63000E4FA4A /* NetworkManager.swift in Sources */,
 				DD66510B2BF80A1100E4FA4A /* GameModel.swift in Sources */,
+				DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */,
 				DD6650F42BF7F60A00E4FA4A /* SceneDelegate.swift in Sources */,
 				DD6650FC2BF7F60A00E4FA4A /* GameList.xcdatamodeld in Sources */,
 			);
@@ -441,25 +457,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		DD66510C2BF80D4500E4FA4A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		DD66510D2BF80D4600E4FA4A /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DD66510C2BF80D4500E4FA4A /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DD6650FA2BF7F60A00E4FA4A /* GameList.xcdatamodeld */ = {

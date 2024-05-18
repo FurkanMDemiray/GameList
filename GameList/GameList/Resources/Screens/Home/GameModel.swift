@@ -23,7 +23,7 @@ struct GameModel: Decodable {
     }
 }
 
-// MARK: - Result
+// MARK: - Results
 struct Results: Decodable {
     let slug, name: String?
     let playtime: Int?
