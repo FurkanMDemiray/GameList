@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeViewController: UIViewController {
 
@@ -43,7 +44,8 @@ class HomeViewController: UIViewController {
                         print(name)
                     }
                 }
-                self.gameImage.downloaded(from: games.results![0].backgroundImage ?? "")
+                self.gameImage.sd_imageIndicator = SDWebImageActivityIndicator.white
+                self.gameImage.sd_setImage(with: URL(string: games.results![0].backgroundImage ?? ""))
                 self.collectionView.reloadData()
             }
         } catch {
@@ -57,7 +59,7 @@ class HomeViewController: UIViewController {
 
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.7, 1.0]
+        gradientLayer.locations = [0.6, 1.0]
         gradientLayer.frame = self.view.bounds
 
         self.view.layer.insertSublayer(gradientLayer, at: 0)

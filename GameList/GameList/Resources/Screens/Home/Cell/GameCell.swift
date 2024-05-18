@@ -10,15 +10,21 @@ import SDWebImage
 
 class GameCell: UICollectionViewCell {
 
+    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var gameImage: UIImageView!
-    @IBOutlet weak var ratingReleaseLabel: UILabel!
+    @IBOutlet weak var releaseLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nameLabel.font = UIFont(name: "PermanentMarker-Regular", size: 18)
-        ratingReleaseLabel.font = UIFont(name: "OldGameFatty", size: 16)
+        configureLabels()
         configureGameImage()
+    }
+
+    private func configureLabels() {
+        nameLabel.font = UIFont(name: "PermanentMarker-Regular", size: 18)
+        releaseLabel.font = UIFont(name: "OldGameFatty", size: 16)
+        ratingLabel.font = UIFont(name: "OldGameFatty", size: 16)
     }
 
     private func configureGameImage() {
@@ -29,7 +35,8 @@ class GameCell: UICollectionViewCell {
 
     func configureCell(with game: Results) {
         nameLabel.text = game.name
-        ratingReleaseLabel.text = "\(game.rating ?? 0.0)  \(game.released ?? "")"
+        releaseLabel.text = game.released
+        ratingLabel.text = "\(game.rating ?? 0) ★"
         gameImage.sd_imageIndicator = SDWebImageActivityIndicator.white
         gameImage.sd_setImage(with: URL(string: game.backgroundImage ?? ""))
     }
