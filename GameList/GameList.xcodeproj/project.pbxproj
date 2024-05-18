@@ -24,6 +24,7 @@
 		DD6651232BF9288C00E4FA4A /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD6651222BF9288C00E4FA4A /* SDWebImageMapKit */; };
 		DD66512A2BF92E3800E4FA4A /* OldGameFatty.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */; };
 		DD66513D2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD66513C2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf */; };
+		DD6651402BF95E3100E4FA4A /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = DD66513F2BF95E3100E4FA4A /* GoogleGenerativeAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6651402BF95E3100E4FA4A /* GoogleGenerativeAI in Frameworks */,
 				DD6651232BF9288C00E4FA4A /* SDWebImageMapKit in Frameworks */,
 				DD6651212BF9288C00E4FA4A /* SDWebImage in Frameworks */,
 			);
@@ -189,6 +191,7 @@
 			packageProductDependencies = (
 				DD6651202BF9288C00E4FA4A /* SDWebImage */,
 				DD6651222BF9288C00E4FA4A /* SDWebImageMapKit */,
+				DD66513F2BF95E3100E4FA4A /* GoogleGenerativeAI */,
 			);
 			productName = GameList;
 			productReference = DD6650EE2BF7F60A00E4FA4A /* GameList.app */;
@@ -220,6 +223,7 @@
 			mainGroup = DD6650E52BF7F60A00E4FA4A;
 			packageReferences = (
 				DD66511F2BF9288C00E4FA4A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				DD66513E2BF95E3100E4FA4A /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			productRefGroup = DD6650EF2BF7F60A00E4FA4A /* Products */;
 			projectDirPath = "";
@@ -490,6 +494,14 @@
 				minimumVersion = 5.19.2;
 			};
 		};
+		DD66513E2BF95E3100E4FA4A /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -502,6 +514,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD66511F2BF9288C00E4FA4A /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		DD66513F2BF95E3100E4FA4A /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD66513E2BF95E3100E4FA4A /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

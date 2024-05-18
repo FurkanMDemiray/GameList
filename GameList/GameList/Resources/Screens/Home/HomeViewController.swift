@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import GoogleGenerativeAI
 
 class HomeViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class HomeViewController: UIViewController {
 
     var games: GameModel?
     var results: [Results]?
+    var gameName: String?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,6 +28,7 @@ class HomeViewController: UIViewController {
         Task {
             await fetchGames()
         }
+
     }
 
     private func configureGameImage() {
@@ -38,10 +41,15 @@ class HomeViewController: UIViewController {
             let games = try await NetworkManager.shared.fetch(from: NetworkManager.shared.url, as: GameModel.self)
             self.games = games
             self.results = games.results
+            self.gameName = games.results![0].name
+            Task {
+                await getAı()
+            }
             DispatchQueue.main.async {
                 for game in games.results! {
                     if let name = game.name {
                         print(name)
+
                     }
                 }
                 self.gameImage.sd_imageIndicator = SDWebImageActivityIndicator.white
@@ -65,9 +73,25 @@ class HomeViewController: UIViewController {
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
+    private func getAı() async {
+        // For text-only input, use the gemini-pro model
+        // Access your API key from your on-demand resource .plist file (see "Set up your API key" above)
+        let model = GenerativeModel(name: "gemini-pro", apiKey: "AIzaSyDudMp41Dtn6SvUnhoTgmGjWdQpB5hxYLQ")
+
+        let prompt = "Write a short description about a \(gameName!) game."
+        do {
+            let response = try await model.generateContent(prompt)
+            if let text = response.text {
+                print(text)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
 }
 
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return games?.results?.count ?? 0
