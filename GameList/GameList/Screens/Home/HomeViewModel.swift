@@ -9,7 +9,8 @@ import Foundation
 import SDWebImage
 
 protocol HomeViewModelDelegate: AnyObject {
-    func reloadCollectionView()
+    func reloadGamesCollectionView()
+    func reloadSliderCollectionView()
 }
 
 protocol HomeViewModelProtocol {
@@ -30,7 +31,7 @@ final class HomeViewModel {
     var images = [UIImage]()
 
     fileprivate func getFirstThreeImages(urls: [String], completion: @escaping ([UIImage]) -> Void) {
-        var images = [UIImage]()
+        var images = Array<UIImage?>(repeating: nil, count: min(3, urls.count))
         let dispatchGroup = DispatchGroup()
 
         for i in 0..<min(3, urls.count) {
@@ -38,14 +39,14 @@ final class HomeViewModel {
                 dispatchGroup.enter()
                 SDWebImageDownloader.shared.downloadImage(with: url) { image, _, _, _ in
                     if let image = image {
-                        images.append(image)
+                        images[i] = image
                     }
                     dispatchGroup.leave()
                 }
             }
         }
         dispatchGroup.notify(queue: .main) {
-            completion(images)
+            completion(images.compactMap { $0 })
         }
     }
 
@@ -58,10 +59,10 @@ final class HomeViewModel {
                     self.game = game
                     if let results = game.results {
                         self.results = results
-                        self.delegate?.reloadCollectionView()
-                        self.getFirstThreeImages(urls: results.map { $0.backgroundImage! }) { images in
+                        self.delegate?.reloadGamesCollectionView()
+                        self.getFirstThreeImages(urls: results.map { $0.backgroundImage ?? "" }) { images in
                             self.images = images
-                            self.delegate?.reloadCollectionView()
+                            self.delegate?.reloadSliderCollectionView()
                         }
                     }
                 }

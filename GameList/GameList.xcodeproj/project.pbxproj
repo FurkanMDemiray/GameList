@@ -28,6 +28,8 @@
 		DD6651482BFBAAD400E4FA4A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651472BFBAAD400E4FA4A /* Constants.swift */; };
 		DD66514A2BFBC4C500E4FA4A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651492BFBC4C500E4FA4A /* HomeViewModel.swift */; };
 		DD66514C2BFBE33200E4FA4A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */; };
+		DD66514F2BFC048800E4FA4A /* SliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD66514E2BFC048800E4FA4A /* SliderCell.xib */; };
+		DD6651502BFC048800E4FA4A /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66514D2BFC048800E4FA4A /* SliderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		DD6651472BFBAAD400E4FA4A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD6651492BFBC4C500E4FA4A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		DD66514D2BFC048800E4FA4A /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
+		DD66514E2BFC048800E4FA4A /* SliderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,8 @@
 			children = (
 				DD6651192BF90F6300E4FA4A /* GameCell.swift */,
 				DD66511A2BF90F6300E4FA4A /* GameCell.xib */,
+				DD66514D2BFC048800E4FA4A /* SliderCell.swift */,
+				DD66514E2BFC048800E4FA4A /* SliderCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -259,6 +265,7 @@
 				DD66512A2BF92E3800E4FA4A /* OldGameFatty.ttf in Resources */,
 				DD6650FE2BF7F60C00E4FA4A /* Assets.xcassets in Resources */,
 				DD6651012BF7F60C00E4FA4A /* Base in Resources */,
+				DD66514F2BFC048800E4FA4A /* SliderCell.xib in Resources */,
 				DD6650F92BF7F60A00E4FA4A /* Base in Resources */,
 				DD66513D2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf in Resources */,
 				DD66511B2BF90F6300E4FA4A /* GameCell.xib in Resources */,
@@ -281,6 +288,7 @@
 				DD6651092BF7F63000E4FA4A /* NetworkManager.swift in Sources */,
 				DD66510B2BF80A1100E4FA4A /* GameModel.swift in Sources */,
 				DD66514C2BFBE33200E4FA4A /* UIViewControllerExtension.swift in Sources */,
+				DD6651502BFC048800E4FA4A /* SliderCell.swift in Sources */,
 				DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */,
 				DD6650F42BF7F60A00E4FA4A /* SceneDelegate.swift in Sources */,
 				DD6650FC2BF7F60A00E4FA4A /* GameList.xcdatamodeld in Sources */,
