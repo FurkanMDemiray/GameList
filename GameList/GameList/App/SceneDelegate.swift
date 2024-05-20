@@ -19,10 +19,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let window = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: window)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
+
+        guard let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
         let homeViewModel = HomeViewModel()
-        viewController.homeViewModel = homeViewModel
-        self.window?.rootViewController = viewController
+        homeViewController.homeViewModel = homeViewModel
+
+        guard let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+
+        // todo: create detailViewModel and assign it to detailViewController
+
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [homeViewController, detailViewController]
+
+        self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
     }
 

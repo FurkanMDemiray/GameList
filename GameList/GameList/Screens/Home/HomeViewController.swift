@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
         homeViewModel.load()
     }
 
+//MARK: - Configure
     private func configureCollectionView() {
         sliderCollectionView.dataSource = self
         sliderCollectionView.delegate = self
@@ -45,6 +46,7 @@ class HomeViewController: UIViewController {
         pageControl.currentPage = 0
     }
 
+//MARK: - ScrollView Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == sliderCollectionView {
             let page = scrollView.contentOffset.x / scrollView.frame.width
