@@ -25,6 +25,9 @@
 		DD66512A2BF92E3800E4FA4A /* OldGameFatty.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */; };
 		DD66513D2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD66513C2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf */; };
 		DD6651402BF95E3100E4FA4A /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = DD66513F2BF95E3100E4FA4A /* GoogleGenerativeAI */; };
+		DD6651482BFBAAD400E4FA4A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651472BFBAAD400E4FA4A /* Constants.swift */; };
+		DD66514A2BFBC4C500E4FA4A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651492BFBC4C500E4FA4A /* HomeViewModel.swift */; };
+		DD66514C2BFBE33200E4FA4A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,9 @@
 		DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToColorExtension.swift; sourceTree = "<group>"; };
 		DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OldGameFatty.ttf; sourceTree = "<group>"; };
 		DD66513C2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PermanentMarker-Regular.ttf"; sourceTree = "<group>"; };
+		DD6651472BFBAAD400E4FA4A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DD6651492BFBC4C500E4FA4A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				DD6651152BF9075B00E4FA4A /* Resources */,
+				DD6651112BF9071A00E4FA4A /* Screens */,
 				DD6651142BF9073300E4FA4A /* App */,
 				DD6651022BF7F60C00E4FA4A /* Info.plist */,
 			);
@@ -100,8 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				DD6651182BF90F4800E4FA4A /* Cell */,
-				DD6650F52BF7F60A00E4FA4A /* HomeViewController.swift */,
 				DD66510A2BF80A1100E4FA4A /* GameModel.swift */,
+				DD6650F52BF7F60A00E4FA4A /* HomeViewController.swift */,
+				DD6651492BFBC4C500E4FA4A /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -118,8 +126,6 @@
 			children = (
 				DD6650F12BF7F60A00E4FA4A /* AppDelegate.swift */,
 				DD6650F32BF7F60A00E4FA4A /* SceneDelegate.swift */,
-				DD6650F72BF7F60A00E4FA4A /* Main.storyboard */,
-				DD6650FF2BF7F60C00E4FA4A /* LaunchScreen.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -127,10 +133,12 @@
 		DD6651152BF9075B00E4FA4A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DD6651462BFBAAB700E4FA4A /* Constants */,
 				DD6651242BF92CC000E4FA4A /* Fonts */,
 				DD6651172BF90C8300E4FA4A /* Network */,
 				DD6651162BF9078E00E4FA4A /* Extensions */,
-				DD6651112BF9071A00E4FA4A /* Screens */,
+				DD6650F72BF7F60A00E4FA4A /* Main.storyboard */,
+				DD6650FF2BF7F60C00E4FA4A /* LaunchScreen.storyboard */,
 				DD6650FD2BF7F60C00E4FA4A /* Assets.xcassets */,
 				DD6650FA2BF7F60A00E4FA4A /* GameList.xcdatamodeld */,
 			);
@@ -142,6 +150,7 @@
 			children = (
 				DD66510F2BF816F500E4FA4A /* ImageViewExtension.swift */,
 				DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */,
+				DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -170,6 +179,14 @@
 				DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DD6651462BFBAAB700E4FA4A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DD6651472BFBAAD400E4FA4A /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,11 +273,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD6650F62BF7F60A00E4FA4A /* HomeViewController.swift in Sources */,
+				DD66514A2BFBC4C500E4FA4A /* HomeViewModel.swift in Sources */,
+				DD6651482BFBAAD400E4FA4A /* Constants.swift in Sources */,
 				DD6651102BF816F500E4FA4A /* ImageViewExtension.swift in Sources */,
 				DD6650F22BF7F60A00E4FA4A /* AppDelegate.swift in Sources */,
 				DD66511C2BF90F6300E4FA4A /* GameCell.swift in Sources */,
 				DD6651092BF7F63000E4FA4A /* NetworkManager.swift in Sources */,
 				DD66510B2BF80A1100E4FA4A /* GameModel.swift in Sources */,
+				DD66514C2BFBE33200E4FA4A /* UIViewControllerExtension.swift in Sources */,
 				DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */,
 				DD6650F42BF7F60A00E4FA4A /* SceneDelegate.swift in Sources */,
 				DD6650FC2BF7F60A00E4FA4A /* GameList.xcdatamodeld in Sources */,

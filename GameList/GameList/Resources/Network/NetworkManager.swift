@@ -19,24 +19,30 @@ class NetworkManager {
     static let shared = NetworkManager()
     private init() { }
 
-    let url = "https://api.rawg.io/api/games?key=6aad45ddf0f54bb8a81a5d3cbd5163ca&dates=2019-09-01,2019-09-30&platforms=18,1,7"
-
-    func fetch<T: Decodable>(from urlString: String, as type: T.Type) async throws -> T {
+    func fetch<T> (from urlString: String, as type: T.Type, completion: @escaping (Result<T, NetworkError>) -> Void) where T: Decodable {
         guard let url = URL(string: urlString) else {
-            throw NetworkError.badURL
+            completion(.failure(.badURL))
+            return
         }
 
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(.failure(.requestFailed))
+                return
+            }
 
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw NetworkError.invalidResponse
-        }
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.invalidResponse))
+                return
+            }
 
-        do {
-            let decodedData = try JSONDecoder().decode(T.self, from: data)
-            return decodedData
-        } catch {
-            throw NetworkError.decodingFailed
+            do {
+                let model = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(model))
+            } catch {
+                completion(.failure(.decodingFailed))
+            }
         }
+        task.resume()
     }
 }
