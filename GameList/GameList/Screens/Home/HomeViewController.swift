@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import SDWebImage
-import GoogleGenerativeAI
 
 class HomeViewController: UIViewController {
 
@@ -26,6 +24,10 @@ class HomeViewController: UIViewController {
         setGradientBackground()
         configureGameImage()
         homeViewModel.load()
+        DispatchQueue.main.async {
+            self.setImages()
+            self.checkAndSetImageIfNeeded()
+        }
     }
 
     private func configureCollectionView() {
@@ -37,6 +39,21 @@ class HomeViewController: UIViewController {
     private func configureGameImage() {
         gameImage.layer.cornerRadius = 20
         gameImage.clipsToBounds = true
+    }
+
+//MARK: - Setting Images
+    private func setImages() {
+        let images = homeViewModel.getFirstThreeImages()
+        gameImage.image = images.first
+    }
+
+    private func checkAndSetImageIfNeeded() {
+        if gameImage.image == nil {
+            DispatchQueue.main.async {
+                self.setImages()
+                self.checkAndSetImageIfNeeded()
+            }
+        }
     }
 
     /*private func getAı() async {
@@ -59,7 +76,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return homeViewModel.nubmerOfItems
+        return homeViewModel.numberOfGames
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
