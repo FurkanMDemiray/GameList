@@ -24,6 +24,7 @@ protocol HomeViewModelProtocol {
     func getResults() -> [Results]
     func getFirstThreeImages() -> [UIImage]
     func searchGames(with text: String)
+    func getGameId(at index: Int) -> Int
 }
 
 final class HomeViewModel {
@@ -77,6 +78,9 @@ final class HomeViewModel {
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
+    func getGameId(at index: Int) -> Int {
+        results[index].id ?? 0
+    }
 
     func searchGames(with text: String) {
         if text.count >= 3 {

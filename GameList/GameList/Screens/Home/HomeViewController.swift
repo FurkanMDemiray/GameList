@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
             homeViewModel.delegate = self
         }
     }
+    var gameId: Int?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,6 +76,16 @@ class HomeViewController: UIViewController {
             notFoundLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             notFoundLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             ])
+    }
+
+//MARK: - Prepare segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailVC" {
+            let detailVC = segue.destination as! DetailViewController
+            if let gameId = gameId {
+                detailVC.detailViewModel = DetailViewModel(gameID: gameId)
+            }
+        }
     }
 
 //MARK: - ScrollView Delegate
@@ -126,6 +137,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return cell
         }
         return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == gamesCollectionView {
+            gameId = homeViewModel.getGameId(at: indexPath.row)
+            performSegue(withIdentifier: "toDetailVC", sender: nil)
+        }
     }
 
 }

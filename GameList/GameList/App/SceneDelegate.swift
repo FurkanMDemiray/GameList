@@ -24,12 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let homeViewModel = HomeViewModel()
         homeViewController.homeViewModel = homeViewModel
 
-        guard let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-
-        // todo: create detailViewModel and assign it to detailViewController
+        guard let favoritesViewController = storyboard.instantiateViewController(withIdentifier: "FavoritesViewController") as? FavoritesViewController else { return }
 
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeViewController, detailViewController]
+        tabBarController.viewControllers = [homeViewController, favoritesViewController]
 
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()

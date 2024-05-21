@@ -9,21 +9,131 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var xboxLabel: UIImageView!
+    @IBOutlet weak var pcLabel: UILabel!
+    @IBOutlet weak var psImage: UIImageView!
+    @IBOutlet weak var gameImage: UIImageView!
+    @IBOutlet weak var likeImage: UIImageView!
+    @IBOutlet weak var metascoreLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var backImage: UIImageView!
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    var detailViewModel: DetailViewModelProtocol! {
+        didSet {
+            detailViewModel.delegate = self
+        }
     }
-    */
+
+    let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No Data"
+        label.font = UIFont(name: "OldGameFatty", size: 24)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideViews()
+        configureBackgroundImage()
+        configureBackImage()
+        configureLabels()
+        detailViewModel.load()
+    }
+
+//MARK: - Configure Views
+    private func configureBackImage() {
+        backImage.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        backImage.addGestureRecognizer(tap)
+    }
+
+    private func configureBackgroundImage() {
+        gameImage.contentMode = .scaleAspectFill
+        gameImage.layer.cornerRadius = 20
+        gameImage.clipsToBounds = true
+        gameImage.layer.masksToBounds = true
+    }
+
+    private func configureLabels() {
+        nameLabel.font = UIFont(name: "PermanentMarker-Regular", size: 24)
+        metascoreLabel.font = UIFont(name: "OldGameFatty", size: 20)
+        releaseDateLabel.font = UIFont(name: "OldGameFatty", size: 20)
+    }
+
+    private func configureNoDataLabel() {
+        noDataLabel.frame = view.bounds
+        view.addSubview(noDataLabel)
+    }
+
+//MARK: - Update View
+    func updateView() {
+        nameLabel.text = detailViewModel?.getName()
+        metascoreLabel.text = "Metacritic: \(detailViewModel?.getMetaCritic() ?? 0)"
+        releaseDateLabel.text = detailViewModel?.getReleaseDate()
+        gameImage.image = detailViewModel?.getBackgroundImage()
+        descriptionLabel.text = detailViewModel?.getDescription()
+    }
+
+//MARK: - Actions
+    @objc func backButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
 
 }
+
+// MARK: - DetailViewModelDelegate
+extension DetailViewController: DetailViewModelDelegate {
+
+    func showLoadingView() {
+        configureNoDataLabel()
+    }
+
+    func hideLoadingView() {
+        noDataLabel.isHidden = true
+    }
+
+    func showViews() {
+        nameLabel.isHidden = false
+        metascoreLabel.isHidden = false
+        releaseDateLabel.isHidden = false
+        gameImage.isHidden = false
+        likeImage.isHidden = false
+    }
+
+    private func hideViews() {
+        xboxLabel.isHidden = true
+        pcLabel.isHidden = true
+        psImage.isHidden = true
+        nameLabel.isHidden = true
+        metascoreLabel.isHidden = true
+        releaseDateLabel.isHidden = true
+        gameImage.isHidden = true
+        likeImage.isHidden = true
+    }
+
+    func showXbox() {
+        xboxLabel.isHidden = false
+    }
+
+    func showPC() {
+        pcLabel.isHidden = false
+    }
+
+    func showPS() {
+        psImage.isHidden = false
+    }
+
+    func reloadImage() {
+        gameImage.image = detailViewModel.getBackgroundImage()
+    }
+
+    func detailViewModelDidFetchData() {
+        updateView()
+    }
+}
+
