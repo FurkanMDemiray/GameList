@@ -9,9 +9,21 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var gamesCollectionView: UICollectionView!
+
+    private var gamesCollectionViewTopConstraint: NSLayoutConstraint!
+
+    let notFoundLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No games found."
+        label.textColor = .white
+        label.font = UIFont(name: "PermanentMarker-Regular", size: 24)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     var homeViewModel: HomeViewModelProtocol! {
         didSet {
@@ -24,6 +36,8 @@ class HomeViewController: UIViewController {
         configureCollectionView()
         setGradientBackground()
         configurePageControl()
+        configureCollectionViewsConstraints()
+        configureNotFoundLabel()
         homeViewModel.load()
     }
 
@@ -44,6 +58,23 @@ class HomeViewController: UIViewController {
     private func configurePageControl() {
         pageControl.numberOfPages = 3
         pageControl.currentPage = 0
+    }
+
+    private func configureCollectionViewsConstraints() {
+        gamesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        sliderCollectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        gamesCollectionViewTopConstraint = gamesCollectionView.topAnchor.constraint(equalTo: sliderCollectionView.bottomAnchor, constant: 8)
+        gamesCollectionViewTopConstraint.isActive = true
+    }
+
+    private func configureNotFoundLabel() {
+        view.addSubview(notFoundLabel)
+        notFoundLabel.isHidden = true
+        NSLayoutConstraint.activate([
+            notFoundLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            notFoundLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
     }
 
 //MARK: - ScrollView Delegate
@@ -94,7 +125,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             return cell
         }
-
         return UICollectionViewCell()
     }
 
@@ -103,12 +133,55 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 // MARK: - ViewModelDelegate
 extension HomeViewController: HomeViewModelDelegate {
 
+    func showSlider() {
+        if gamesCollectionViewTopConstraint != nil {
+            gamesCollectionViewTopConstraint.isActive = false
+        }
+        gamesCollectionViewTopConstraint = gamesCollectionView.topAnchor.constraint(equalTo: sliderCollectionView.bottomAnchor, constant: 8)
+        gamesCollectionViewTopConstraint.isActive = true
+
+        sliderCollectionView.isHidden = false
+        pageControl.isHidden = false
+    }
+
+    func hideSlider() {
+        if gamesCollectionViewTopConstraint != nil {
+            gamesCollectionViewTopConstraint.isActive = false
+        }
+        gamesCollectionViewTopConstraint = gamesCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8)
+        gamesCollectionViewTopConstraint.isActive = true
+
+        sliderCollectionView.isHidden = true
+        pageControl.isHidden = true
+    }
+
     func reloadGamesCollectionView() {
         gamesCollectionView.reloadData()
     }
 
     func reloadSliderCollectionView() {
         sliderCollectionView.reloadData()
+    }
+}
+
+//MARK: - SearchBar Delegate
+extension HomeViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        homeViewModel.searchGames(with: searchText)
+        if searchText.isEmpty {
+            showSlider()
+        } else {
+            if homeViewModel.numberOfGames == 0 {
+                notFoundLabel.isHidden = false
+            } else {
+                notFoundLabel.isHidden = true
+            }
+        }
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 

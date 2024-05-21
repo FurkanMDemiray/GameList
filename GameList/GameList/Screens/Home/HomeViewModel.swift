@@ -11,6 +11,8 @@ import SDWebImage
 protocol HomeViewModelDelegate: AnyObject {
     func reloadGamesCollectionView()
     func reloadSliderCollectionView()
+    func hideSlider()
+    func showSlider()
 }
 
 protocol HomeViewModelProtocol {
@@ -21,6 +23,7 @@ protocol HomeViewModelProtocol {
     func getGameModel() -> GameModel?
     func getResults() -> [Results]
     func getFirstThreeImages() -> [UIImage]
+    func searchGames(with text: String)
 }
 
 final class HomeViewModel {
@@ -75,6 +78,21 @@ final class HomeViewModel {
 
 extension HomeViewModel: HomeViewModelProtocol {
 
+    func searchGames(with text: String) {
+        if text.count >= 3 {
+            let filteredResults = game?.results?.filter {
+                $0.name?.lowercased().contains(text.lowercased()) ?? false
+            }
+            delegate?.hideSlider()
+            results = filteredResults ?? []
+        }
+        else {
+            delegate?.showSlider()
+            results = game?.results ?? []
+        }
+        delegate?.reloadGamesCollectionView()
+    }
+
     func getFirstThreeImages() -> [UIImage] {
         images
     }
@@ -94,4 +112,5 @@ extension HomeViewModel: HomeViewModelProtocol {
     var numberOfGames: Int {
         results.count
     }
+
 }
