@@ -10,8 +10,8 @@ import SDWebImage
 
 protocol DetailViewModelDelegate: AnyObject {
     func detailViewModelDidFetchData()
-    func showLoadingView()
-    func hideLoadingView()
+    func showNoData()
+    func hideNodata()
     func showViews()
     func reloadImage()
     func showXbox()
@@ -33,13 +33,16 @@ protocol DetailViewModelProtocol {
 final class DetailViewModel {
 
     weak var delegate: DetailViewModelDelegate?
-    var name: String?
-    var metaCritic: Int?
-    var releaseDate: String?
-    var backgroundImage = UIImageView()
-    var platforms = [String]()
-    var gameID: Int
-    var description: String?
+    private var name: String?
+    private var metaCritic: Int?
+    private var releaseDate: String?
+    private var backgroundImage = UIImageView()
+    private var platforms = [String]()
+    private var gameID: Int
+    private var description: String?
+    private var retryCount = 0
+    private let maxRetries = 3
+    private let retryDelay: TimeInterval = 2.0
 
     init(gameID: Int) {
         self.gameID = gameID
@@ -65,13 +68,15 @@ final class DetailViewModel {
         }
     }
 
+// MARK: - Fetch Data
     fileprivate func fetchGames() {
-        delegate?.showLoadingView()
+        delegate?.showNoData()
         NetworkManager.shared.fetch(from: Constants.detailUrl(gameID), as: DetailModel.self) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let detail):
                 DispatchQueue.main.async {
+                    self.retryCount = 0
                     self.metaCritic = detail.metacritic
                     self.releaseDate = detail.released
                     self.name = detail.name
@@ -85,21 +90,47 @@ final class DetailViewModel {
                         self.delegate?.reloadImage()
                     }
                     self.delegate?.detailViewModelDidFetchData()
-                    self.delegate?.hideLoadingView()
+                    self.delegate?.hideNodata()
                     self.delegate?.showViews()
                 }
             case .failure(let error):
                 print(error)
+                self.retryFetchGames()
+            }
+        }
+    }
+
+    fileprivate func retryFetchGames() {
+        if retryCount < maxRetries {
+            retryCount += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + retryDelay) {
+                self.fetchGames()
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.delegate?.showNoData()
             }
         }
     }
 }
 
+// MARK: - DetailViewModelProtocol
 extension DetailViewModel: DetailViewModelProtocol {
     func getDescription() -> String? {
-        description
+        for words in description!.components(separatedBy: " ") {
+            if words.contains("<p>") || words.contains("</p>") || words.contains("<br>") || words.contains("<br />") {
+                description = description?.replacingOccurrences(of: "<p>", with: "")
+                description = description?.replacingOccurrences(of: "</p>", with: "")
+                description = description?.replacingOccurrences(of: "<br>", with: "")
+                description = description?.replacingOccurrences(of: "<br />", with: "")
+                if words.contains("Español") {
+                    // delete the rest of the string
+                    description = description?.components(separatedBy: "Español")[0]
+                }
+            }
+        }
+        return description
     }
-    
 
     func getName() -> String? {
         name

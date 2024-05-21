@@ -20,10 +20,10 @@ struct DetailModel: Decodable {
     let website: String?
     let rating: Double?
     let ratingTop: Int?
-    let ratings: [DetailRating]?
+    let ratings: [Rating]?
     let reactions: [String: Int]?
     let added: Int?
-    let addedByStatus: DetailAddedByStatus?
+    let addedByStatus: AddedByStatus?
     let playtime, screenshotsCount, moviesCount, creatorsCount: Int?
     let achievementsCount, parentAchievementsCount: Int?
     let redditURL: String?
@@ -36,11 +36,11 @@ struct DetailModel: Decodable {
     let userGame: JSONNull?
     let reviewsCount: Int?
     let saturatedColor, dominantColor: String?
-    let parentPlatforms: [DetailParentPlatform]?
-    let platforms: [DetailPlatformElement]?
-    let stores: [DetailStore]?
+    let parentPlatforms: [ParentPlatform]?
+    let platforms: [PlatformElement]?
+    let stores: [Store]?
     let developers, genres, tags, publishers: [Developer]?
-    let esrbRating: DetailEsrbRating?
+    let esrbRating: EsrbRating?
     let clip: JSONNull?
     let descriptionRaw: String?
 
@@ -89,12 +89,6 @@ struct DetailModel: Decodable {
     }
 }
 
-// MARK: - AddedByStatus
-struct DetailAddedByStatus: Decodable {
-    let yet, owned, beaten, toplay: Int?
-    let dropped, playing: Int?
-}
-
 // MARK: - Developer
 struct Developer: Decodable {
     let id: Int?
@@ -112,15 +106,6 @@ struct Developer: Decodable {
     }
 }
 
-enum DetailLanguage: String, Decodable {
-    case eng = "eng"
-}
-
-// MARK: - EsrbRating
-struct DetailEsrbRating: Decodable {
-    let id: Int?
-    let name, slug: String?
-}
 
 // MARK: - MetacriticPlatform
 struct MetacriticPlatform: Decodable {
@@ -135,59 +120,4 @@ struct MetacriticPlatformPlatform: Decodable {
     let name, slug: String?
 }
 
-// MARK: - ParentPlatform
-struct DetailParentPlatform: Decodable {
-    let platform: EsrbRating?
-}
-
-// MARK: - PlatformElement
-struct DetailPlatformElement: Decodable {
-    let platform: DetailPlatformPlatform?
-    let releasedAt: String?
-    let requirements: Requirements?
-
-    enum CodingKeys: String, CodingKey {
-        case platform
-        case releasedAt = "released_at"
-        case requirements
-    }
-}
-
-// MARK: - PlatformPlatform
-struct DetailPlatformPlatform: Decodable {
-    let id: Int?
-    let name, slug: String?
-    let image, yearEnd: JSONNull?
-    let yearStart: Int?
-    let gamesCount: Int?
-    let imageBackground: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, slug, image
-        case yearEnd = "year_end"
-        case yearStart = "year_start"
-        case gamesCount = "games_count"
-        case imageBackground = "image_background"
-    }
-}
-
-// MARK: - Requirements
-struct DetailRequirements: Decodable {
-    let minimum, recommended: String?
-}
-
-// MARK: - Rating
-struct DetailRating: Decodable {
-    let id: Int?
-    let title: String?
-    let count: Int?
-    let percent: Double?
-}
-
-// MARK: - Store
-struct DetailStore: Decodable {
-    let id: Int?
-    let url: String?
-    let store: Developer?
-}
 

@@ -9,7 +9,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    
+//MARK: - Outlets
+    @IBOutlet weak var aboutGameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var xboxLabel: UIImageView!
     @IBOutlet weak var pcLabel: UILabel!
@@ -43,6 +44,7 @@ class DetailViewController: UIViewController {
         configureBackImage()
         configureLabels()
         detailViewModel.load()
+        //configureDescriptionLabel()
     }
 
 //MARK: - Configure Views
@@ -70,6 +72,14 @@ class DetailViewController: UIViewController {
         view.addSubview(noDataLabel)
     }
 
+    private func configureDescriptionLabel() {
+        view.addSubview(descriptionLabel)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.topAnchor.constraint(equalTo: aboutGameLabel.bottomAnchor, constant: 16).isActive = true
+        descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+    }
+
 //MARK: - Update View
     func updateView() {
         nameLabel.text = detailViewModel?.getName()
@@ -84,16 +94,19 @@ class DetailViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func readMoreBtnClicked(_ sender: Any) {
+
+    }
 }
 
 // MARK: - DetailViewModelDelegate
 extension DetailViewController: DetailViewModelDelegate {
 
-    func showLoadingView() {
+    func showNoData() {
         configureNoDataLabel()
     }
 
-    func hideLoadingView() {
+    func hideNodata() {
         noDataLabel.isHidden = true
     }
 
@@ -103,6 +116,8 @@ extension DetailViewController: DetailViewModelDelegate {
         releaseDateLabel.isHidden = false
         gameImage.isHidden = false
         likeImage.isHidden = false
+        aboutGameLabel.isHidden = false
+        descriptionLabel.isHidden = false
     }
 
     private func hideViews() {
@@ -114,6 +129,8 @@ extension DetailViewController: DetailViewModelDelegate {
         releaseDateLabel.isHidden = true
         gameImage.isHidden = true
         likeImage.isHidden = true
+        aboutGameLabel.isHidden = true
+        descriptionLabel.isHidden = true
     }
 
     func showXbox() {
