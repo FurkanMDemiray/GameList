@@ -49,6 +49,7 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         hideViews()
         setConfigures()
+        view.addGradient()
     }
 
     override func viewWillAppear(_ animated: Bool) {

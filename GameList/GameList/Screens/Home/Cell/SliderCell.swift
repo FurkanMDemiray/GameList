@@ -15,6 +15,7 @@ class SliderCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureSliderImage()
+        self.backgroundColor = .clear
     }
 
     private func configureSliderImage() {

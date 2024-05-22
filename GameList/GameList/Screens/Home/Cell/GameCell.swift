@@ -19,6 +19,7 @@ class GameCell: UITableViewCell {
         super.awakeFromNib()
         configureLabels()
         configureGameImage()
+        self.backgroundColor = .clear
         self.selectionStyle = .none
     }
 

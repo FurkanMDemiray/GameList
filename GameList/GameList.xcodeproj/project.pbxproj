@@ -17,10 +17,9 @@
 		DD6651012BF7F60C00E4FA4A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DD6651002BF7F60C00E4FA4A /* Base */; };
 		DD6651092BF7F63000E4FA4A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651082BF7F63000E4FA4A /* NetworkManager.swift */; };
 		DD66510B2BF80A1100E4FA4A /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66510A2BF80A1100E4FA4A /* GameModel.swift */; };
-		DD6651102BF816F500E4FA4A /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66510F2BF816F500E4FA4A /* ImageViewExtension.swift */; };
 		DD66511B2BF90F6300E4FA4A /* GameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD66511A2BF90F6300E4FA4A /* GameCell.xib */; };
 		DD66511C2BF90F6300E4FA4A /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651192BF90F6300E4FA4A /* GameCell.swift */; };
-		DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */; };
+		DD66511E2BF910B000E4FA4A /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66511D2BF910B000E4FA4A /* ColorExtension.swift */; };
 		DD6651212BF9288C00E4FA4A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DD6651202BF9288C00E4FA4A /* SDWebImage */; };
 		DD6651232BF9288C00E4FA4A /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD6651222BF9288C00E4FA4A /* SDWebImageMapKit */; };
 		DD66512A2BF92E3800E4FA4A /* OldGameFatty.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */; };
@@ -28,7 +27,7 @@
 		DD6651402BF95E3100E4FA4A /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = DD66513F2BF95E3100E4FA4A /* GoogleGenerativeAI */; };
 		DD6651482BFBAAD400E4FA4A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651472BFBAAD400E4FA4A /* Constants.swift */; };
 		DD66514A2BFBC4C500E4FA4A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6651492BFBC4C500E4FA4A /* HomeViewModel.swift */; };
-		DD66514C2BFBE33200E4FA4A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */; };
+		DD66514C2BFBE33200E4FA4A /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66514B2BFBE33200E4FA4A /* AlertExtension.swift */; };
 		DD66514F2BFC048800E4FA4A /* SliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD66514E2BFC048800E4FA4A /* SliderCell.xib */; };
 		DD6651502BFC048800E4FA4A /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66514D2BFC048800E4FA4A /* SliderCell.swift */; };
 		DD7E2CBC2BFCDE1900ECAAFB /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CBB2BFCDE1900ECAAFB /* FavoritesViewController.swift */; };
@@ -37,6 +36,7 @@
 		DD7E2CC22BFE7DC200ECAAFB /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */; };
 		DD7E2CC72BFE84A500ECAAFB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */; };
 		DD7E2CC92BFE8AA700ECAAFB /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC82BFE8AA700ECAAFB /* FavoritesModel.swift */; };
+		DD7E2CCB2BFEAB3800ECAAFB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CCA2BFEAB3800ECAAFB /* GradientExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,15 +52,14 @@
 		DD6651022BF7F60C00E4FA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD6651082BF7F63000E4FA4A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DD66510A2BF80A1100E4FA4A /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
-		DD66510F2BF816F500E4FA4A /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		DD6651192BF90F6300E4FA4A /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		DD66511A2BF90F6300E4FA4A /* GameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCell.xib; sourceTree = "<group>"; };
-		DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToColorExtension.swift; sourceTree = "<group>"; };
+		DD66511D2BF910B000E4FA4A /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		DD6651292BF92E3800E4FA4A /* OldGameFatty.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OldGameFatty.ttf; sourceTree = "<group>"; };
 		DD66513C2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PermanentMarker-Regular.ttf"; sourceTree = "<group>"; };
 		DD6651472BFBAAD400E4FA4A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD6651492BFBC4C500E4FA4A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		DD66514B2BFBE33200E4FA4A /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		DD66514D2BFC048800E4FA4A /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
 		DD66514E2BFC048800E4FA4A /* SliderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderCell.xib; sourceTree = "<group>"; };
 		DD7E2CBB2BFCDE1900ECAAFB /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +68,7 @@
 		DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DD7E2CC82BFE8AA700ECAAFB /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
+		DD7E2CCA2BFEAB3800ECAAFB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,9 +170,9 @@
 		DD6651162BF9078E00E4FA4A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DD66510F2BF816F500E4FA4A /* ImageViewExtension.swift */,
-				DD66511D2BF910B000E4FA4A /* HexToColorExtension.swift */,
-				DD66514B2BFBE33200E4FA4A /* UIViewControllerExtension.swift */,
+				DD66511D2BF910B000E4FA4A /* ColorExtension.swift */,
+				DD66514B2BFBE33200E4FA4A /* AlertExtension.swift */,
+				DD7E2CCA2BFEAB3800ECAAFB /* GradientExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -320,18 +320,18 @@
 				DD66514A2BFBC4C500E4FA4A /* HomeViewModel.swift in Sources */,
 				DD6651482BFBAAD400E4FA4A /* Constants.swift in Sources */,
 				DD7E2CC92BFE8AA700ECAAFB /* FavoritesModel.swift in Sources */,
-				DD6651102BF816F500E4FA4A /* ImageViewExtension.swift in Sources */,
 				DD6650F22BF7F60A00E4FA4A /* AppDelegate.swift in Sources */,
 				DD66511C2BF90F6300E4FA4A /* GameCell.swift in Sources */,
 				DD6651092BF7F63000E4FA4A /* NetworkManager.swift in Sources */,
 				DD66510B2BF80A1100E4FA4A /* GameModel.swift in Sources */,
-				DD66514C2BFBE33200E4FA4A /* UIViewControllerExtension.swift in Sources */,
+				DD66514C2BFBE33200E4FA4A /* AlertExtension.swift in Sources */,
 				DD6651502BFC048800E4FA4A /* SliderCell.swift in Sources */,
-				DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */,
+				DD66511E2BF910B000E4FA4A /* ColorExtension.swift in Sources */,
 				DD7E2CC22BFE7DC200ECAAFB /* FavoritesViewModel.swift in Sources */,
 				DD6650F42BF7F60A00E4FA4A /* SceneDelegate.swift in Sources */,
 				DD6650FC2BF7F60A00E4FA4A /* GameList.xcdatamodeld in Sources */,
 				DD7E2CBC2BFCDE1900ECAAFB /* FavoritesViewController.swift in Sources */,
+				DD7E2CCB2BFEAB3800ECAAFB /* GradientExtension.swift in Sources */,
 				DD7E2CC02BFCEE4000ECAAFB /* DetailModel.swift in Sources */,
 				DD19182B2BFC18ED00CEAB6F /* DetailViewController.swift in Sources */,
 				DD7E2CC72BFE84A500ECAAFB /* CoreDataManager.swift in Sources */,

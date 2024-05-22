@@ -29,6 +29,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureColectionView()
+        view.addGradient()
     }
 
     override func viewWillAppear(_ animated: Bool) {

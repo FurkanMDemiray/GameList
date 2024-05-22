@@ -52,7 +52,7 @@ final class DetailViewModel {
     private var gameID: Int
     private var description: String?
     private var retryCount = 0
-    private let maxRetries = 3
+    private let maxRetries = 10
     private let retryDelay: TimeInterval = 2.0
     private var metacriticURL: String?
     private var redditURL: String?

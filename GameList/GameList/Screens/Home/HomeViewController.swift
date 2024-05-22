@@ -51,6 +51,7 @@ final class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = 116
+        tableView.backgroundView?.addGradient()
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "GameCell", bundle: nil), forCellReuseIdentifier: "GameCell")
     }
@@ -84,7 +85,7 @@ final class HomeViewController: UIViewController {
     private func setConfigures() {
         hidePageControl()
         configureCollectionView()
-        setGradientBackground()
+        view.addGradient()
         configurePageControl()
         configureCollectionViewsConstraints()
         configureNoDataLabel()
