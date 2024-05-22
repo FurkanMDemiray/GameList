@@ -11,6 +11,7 @@ import SafariServices
 class DetailViewController: UIViewController {
 
 //MARK: - Outlets
+    @IBOutlet weak var platformsLabel: UILabel!
     @IBOutlet weak var metacriticLinkLabel: UILabel!
     @IBOutlet weak var redditLinkLabel: UILabel!
     @IBOutlet weak var readMoreBtn: UIButton!
@@ -80,7 +81,7 @@ class DetailViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: aboutGameLabel.bottomAnchor, constant: 16).isActive = true
         descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        descriptionLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        descriptionLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 
     private func configureReadMoreBtn() {
@@ -100,6 +101,12 @@ class DetailViewController: UIViewController {
         redditLinkLabel.addGestureRecognizer(redditTap)
     }
 
+    private func configureLikeImage() {
+        likeImage.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(likeImageTapped))
+        likeImage.addGestureRecognizer(tap)
+    }
+
     private func setConfigures() {
         configureBackgroundImage()
         configureBackImage()
@@ -107,6 +114,7 @@ class DetailViewController: UIViewController {
         configureDescriptionLabel()
         configureReadMoreBtn()
         configureLinkLabels()
+        configureLikeImage()
     }
 
 //MARK: - Update View
@@ -130,7 +138,7 @@ class DetailViewController: UIViewController {
     private func collapseDescriptionLabel() {
         UIView.animate(withDuration: 0.3) {
             NSLayoutConstraint.deactivate(self.descriptionLabel.constraints.filter { $0.firstAttribute == .height })
-            self.descriptionLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            self.descriptionLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
             self.view.layoutIfNeeded()
         }
     }
@@ -156,6 +164,16 @@ class DetailViewController: UIViewController {
 
     @objc func redditLinkTapped() {
         detailViewModel.goToReddit()
+    }
+
+    @objc func likeImageTapped() {
+        if detailViewModel.isLiked() {
+            likeImage.image = UIImage(systemName: "heart")
+            detailViewModel.dislikeGame()
+        } else {
+            likeImage.image = UIImage(systemName: "heart.fill")
+            detailViewModel.likeGame()
+        }
     }
 }
 
@@ -196,6 +214,10 @@ extension DetailViewController: DetailViewModelDelegate {
         likeImage.isHidden = false
         aboutGameLabel.isHidden = false
         descriptionLabel.isHidden = false
+        readMoreBtn.isHidden = false
+        metacriticLinkLabel.isHidden = false
+        redditLinkLabel.isHidden = false
+        platformsLabel.isHidden = false
     }
 
     private func hideViews() {
@@ -209,6 +231,10 @@ extension DetailViewController: DetailViewModelDelegate {
         likeImage.isHidden = true
         aboutGameLabel.isHidden = true
         descriptionLabel.isHidden = true
+        readMoreBtn.isHidden = true
+        metacriticLinkLabel.isHidden = true
+        redditLinkLabel.isHidden = true
+        platformsLabel.isHidden = true
     }
 
     func showXbox() {
@@ -229,6 +255,11 @@ extension DetailViewController: DetailViewModelDelegate {
 
     func detailViewModelDidFetchData() {
         updateView()
+        if detailViewModel.isLiked() {
+            likeImage.image = UIImage(systemName: "heart.fill")
+        } else {
+            likeImage.image = UIImage(systemName: "heart")
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 import SDWebImage
-
+import CoreData
 
 // MARK: - Delegate
 protocol DetailViewModelDelegate: AnyObject {
@@ -36,6 +36,9 @@ protocol DetailViewModelProtocol {
     func getDescription() -> String?
     func goToMetacritic()
     func goToReddit()
+    func likeGame()
+    func dislikeGame()
+    func isLiked() -> Bool
 }
 
 // MARK: - ViewModel
@@ -131,6 +134,57 @@ final class DetailViewModel {
 
 // MARK: - DetailViewModelProtocol
 extension DetailViewModel: DetailViewModelProtocol {
+
+    func isLiked() -> Bool {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LikedGames")
+        request.predicate = NSPredicate(format: "name = %@", name!)
+        do {
+            let result = try context.fetch(request)
+            if result.count > 0 {
+                return true
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        return false
+        self.delegate?.detailViewModelDidFetchData()
+    }
+
+    func dislikeGame() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LikedGames")
+        request.predicate = NSPredicate(format: "name = %@", name!)
+        do {
+            let result = try context.fetch(request)
+            if result.count > 0 {
+                context.delete(result[0] as! NSManagedObject)
+                try context.save()
+                print("Deleted")
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+
+    func likeGame() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        if let entity = NSEntityDescription.entity(forEntityName: "LikedGames", in: context) {
+            let newLikedGame = NSManagedObject(entity: entity, insertInto: context)
+            newLikedGame.setValue(name, forKey: "name")
+            newLikedGame.setValue(metaCritic, forKey: "score")
+            newLikedGame.setValue(releaseDate, forKey: "releaseDate")
+            newLikedGame.setValue(backgroundImage.image?.pngData(), forKey: "image")
+            do {
+                try context.save()
+                print("Saved")
+            } catch {
+                print("Error: \(error)")
+            }
+        } else {
+            print("Failed to create entity description")
+        }
+    }
 
     func goToMetacritic() {
         if let url = metacriticURL {
