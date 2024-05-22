@@ -10,7 +10,6 @@ import CoreData
 
 protocol FavoritesViewModelDelegate: AnyObject {
     func didFetchData()
-
 }
 
 protocol FavoritesViewModelProtocol {

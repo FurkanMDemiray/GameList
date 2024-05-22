@@ -36,6 +36,7 @@
 		DD7E2CC02BFCEE4000ECAAFB /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CBF2BFCEE4000ECAAFB /* DetailModel.swift */; };
 		DD7E2CC22BFE7DC200ECAAFB /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */; };
 		DD7E2CC42BFE7DEB00ECAAFB /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC32BFE7DEB00ECAAFB /* FavoritesModel.swift */; };
+		DD7E2CC72BFE84A500ECAAFB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		DD7E2CBF2BFCEE4000ECAAFB /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 		DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		DD7E2CC32BFE7DEB00ECAAFB /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
+		DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 		DD6651152BF9075B00E4FA4A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DD7E2CC52BFE849500ECAAFB /* CoreData */,
 				DD6651462BFBAAB700E4FA4A /* Constants */,
 				DD6651242BF92CC000E4FA4A /* Fonts */,
 				DD6651172BF90C8300E4FA4A /* Network */,
@@ -160,7 +163,6 @@
 				DD6650F72BF7F60A00E4FA4A /* Main.storyboard */,
 				DD6650FF2BF7F60C00E4FA4A /* LaunchScreen.storyboard */,
 				DD6650FD2BF7F60C00E4FA4A /* Assets.xcassets */,
-				DD6650FA2BF7F60A00E4FA4A /* GameList.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -219,6 +221,15 @@
 				DD7E2CC32BFE7DEB00ECAAFB /* FavoritesModel.swift */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		DD7E2CC52BFE849500ECAAFB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DD6650FA2BF7F60A00E4FA4A /* GameList.xcdatamodeld */,
+				DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +334,7 @@
 				DD7E2CC02BFCEE4000ECAAFB /* DetailModel.swift in Sources */,
 				DD19182B2BFC18ED00CEAB6F /* DetailViewController.swift in Sources */,
 				DD7E2CC42BFE7DEB00ECAAFB /* FavoritesModel.swift in Sources */,
+				DD7E2CC72BFE84A500ECAAFB /* CoreDataManager.swift in Sources */,
 				DD7E2CBE2BFCED4A00ECAAFB /* DetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -56,9 +56,11 @@ final class DetailViewModel {
     private let retryDelay: TimeInterval = 2.0
     private var metacriticURL: String?
     private var redditURL: String?
+    private let context: NSManagedObjectContext
 
-    init(gameID: Int) {
+    init(gameID: Int, context: NSManagedObjectContext = CoreDataManager.shared.context) {
         self.gameID = gameID
+        self.context = context
     }
 
     fileprivate func checkPlatforms() {
@@ -124,46 +126,39 @@ final class DetailViewModel {
 extension DetailViewModel: DetailViewModelProtocol {
 
     func isLiked() -> Bool {
-        /*let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LikedGames")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGames")
         request.predicate = NSPredicate(format: "name = %@", name!)
         do {
             let result = try context.fetch(request)
-            if result.count > 0 {
-                return true
-            }
+            return result.count > 0
         } catch {
             print("Error: \(error)")
+            return false
         }
-        return false
-        self.delegate?.detailViewModelDidFetchData()*/
-        return false
     }
 
     func dislikeGame() {
-        /*let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LikedGames")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGames")
         request.predicate = NSPredicate(format: "name = %@", name!)
         do {
             let result = try context.fetch(request)
-            if result.count > 0 {
-                context.delete(result[0] as! NSManagedObject)
+            if let gameToDelete = result.first as? NSManagedObject {
+                context.delete(gameToDelete)
                 try context.save()
                 print("Deleted")
             }
         } catch {
             print("Error: \(error)")
-        }*/
+        }
     }
 
     func likeGame() {
-      /*  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        if let entity = NSEntityDescription.entity(forEntityName: "LikedGames", in: context) {
+        if let entity = NSEntityDescription.entity(forEntityName: "FavoriteGames", in: context) {
             let newLikedGame = NSManagedObject(entity: entity, insertInto: context)
             newLikedGame.setValue(name, forKey: "name")
             newLikedGame.setValue(metaCritic, forKey: "score")
             newLikedGame.setValue(releaseDate, forKey: "releaseDate")
-            newLikedGame.setValue(backgroundImage.image?.pngData(), forKey: "image")
+            newLikedGame.setValue(backgroundImage, forKey: "image")
             do {
                 try context.save()
                 print("Saved")
@@ -172,7 +167,7 @@ extension DetailViewModel: DetailViewModelProtocol {
             }
         } else {
             print("Failed to create entity description")
-        }*/
+        }
     }
 
     func goToMetacritic() {
