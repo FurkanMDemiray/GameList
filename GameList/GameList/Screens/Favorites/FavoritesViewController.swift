@@ -9,13 +9,22 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
 
     var favoritesViewModel: FavoritesViewModelProtocol! {
         didSet {
             favoritesViewModel.delegate = self
         }
     }
+
+    var noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No favorites found!"
+        label.font = UIFont(name: "OldGameFatty", size: 24)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,47 +36,64 @@ class FavoritesViewController: UIViewController {
     }
 
     private func configureColectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "GameCell", bundle: nil), forCellWithReuseIdentifier: "GameCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.rowHeight = 116
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "GameCell", bundle: nil), forCellReuseIdentifier: "GameCell")
+    }
+
+    private func configureNoDataLabel() {
+        view.addSubview(noDataLabel)
+        noDataLabel.translatesAutoresizingMaskIntoConstraints = false
+        noDataLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noDataLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
 }
 
-extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//MARK: - TableView Delegate
+extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favoritesViewModel.getNumberOfItems()
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        /*let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath) as! GameCell
         let item = favoritesViewModel.getItem(at: indexPath.row)
         cell.configureCell(model: item)
-        return cell*/
-        return UICollectionViewCell()
+        return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 116)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        var config = UICollectionLayoutListConfiguration(appearance: .plain)
-        config.trailingSwipeActionsConfigurationProvider = { indexPath in
-            let del = UIContextualAction(style: .destructive, title: "Delete") {
-                [weak self] action, view, completion in
-                self?.favoritesViewModel.deleteItem(at: indexPath.row)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            // alert
+            let alert = UIAlertController(title: "Are you sure?", message: "Do you want to delete this game from favorites?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                completion(false)
+            }))
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                self.favoritesViewModel.deleteItem(at: indexPath.row)
+                self.favoritesViewModel.getData()
+                tableView.reloadData()
                 completion(true)
-            }
-            return UISwipeActionsConfiguration(actions: [del])
+            }))
+            self.present(alert, animated: true)
         }
-        return UISwipeActionsConfiguration(actions: [])
+
+        delete.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [delete])
     }
 }
 
+// MARK: - FavoritesViewModelDelegate
 extension FavoritesViewController: FavoritesViewModelDelegate {
-    func reloadCollectionView() {
-        collectionView.reloadData()
+    func showNoData() {
+        favoritesViewModel.getNumberOfItems() == 0 ? configureNoDataLabel() : noDataLabel.removeFromSuperview()
+    }
+
+    func reloadTableView() {
+        tableView.reloadData()
     }
 }

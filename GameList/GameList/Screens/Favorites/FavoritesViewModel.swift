@@ -9,7 +9,8 @@ import Foundation
 import CoreData
 
 protocol FavoritesViewModelDelegate: AnyObject {
-    func reloadCollectionView()
+    func reloadTableView()
+    func showNoData()
 }
 
 protocol FavoritesViewModelProtocol {
@@ -43,7 +44,8 @@ final class FavoritesViewModel {
                     let releaseDate = data.value(forKey: "releaseDate") as? String
                     let image = data.value(forKey: "image") as? String
                     self.models.append(FavoritesModel(name: name, score: score, releaseDate: releaseDate, image: image))
-                    self.delegate?.reloadCollectionView()
+                    self.delegate?.reloadTableView()
+                    self.delegate?.showNoData()
                 }
             } catch {
                 print("Failed")
@@ -63,8 +65,7 @@ extension FavoritesViewModel: FavoritesViewModelProtocol {
             if let gameToDelete = result.first as? NSManagedObject {
                 context.delete(gameToDelete)
                 try context.save()
-                print("Deleted")
-                delegate?.reloadCollectionView()
+                delegate?.reloadTableView()
             }
         } catch {
             print("Error: \(error)")
@@ -72,8 +73,7 @@ extension FavoritesViewModel: FavoritesViewModelProtocol {
     }
 
     func getNumberOfItems() -> Int {
-        print(models.count)
-        return models.count
+        models.count
     }
 
     func getItem(at index: Int) -> FavoritesModel {
@@ -82,5 +82,8 @@ extension FavoritesViewModel: FavoritesViewModelProtocol {
 
     func getData() {
         fetchData()
+        if models.isEmpty {
+            delegate?.showNoData()
+        }
     }
 }
