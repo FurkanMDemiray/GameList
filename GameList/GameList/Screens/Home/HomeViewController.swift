@@ -9,16 +9,16 @@ import UIKit
 
 final class HomeViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var sliderCollectionView: UICollectionView!
-    @IBOutlet weak var gamesCollectionView: UICollectionView!
 
-    private var gamesCollectionViewTopConstraint: NSLayoutConstraint!
+    private var tableViewTopConstraint: NSLayoutConstraint!
 
     let notFoundLabel: UILabel = {
         let label = UILabel()
-        label.text = "No games found."
+        label.text = "No game found!"
         label.textColor = .white
         label.font = UIFont(name: "PermanentMarker-Regular", size: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,17 +32,9 @@ final class HomeViewController: UIViewController {
     }
     var gameId: Int?
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureCollectionView()
-        setGradientBackground()
-        configurePageControl()
-        configureCollectionViewsConstraints()
-        configureNotFoundLabel()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        setConfigures()
         homeViewModel.load()
     }
 
@@ -51,13 +43,16 @@ final class HomeViewController: UIViewController {
         sliderCollectionView.dataSource = self
         sliderCollectionView.delegate = self
         sliderCollectionView.showsHorizontalScrollIndicator = false
-
-        gamesCollectionView.dataSource = self
-        gamesCollectionView.delegate = self
-        gamesCollectionView.showsVerticalScrollIndicator = false
-
-        gamesCollectionView.register(UINib(nibName: "GameCell", bundle: nil), forCellWithReuseIdentifier: "GameCell")
         sliderCollectionView.register(UINib(nibName: "SliderCell", bundle: nil), forCellWithReuseIdentifier: "SliderCell")
+    }
+
+    private func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.rowHeight = 116
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "GameCell", bundle: nil), forCellReuseIdentifier: "GameCell")
     }
 
     private func configurePageControl() {
@@ -66,20 +61,34 @@ final class HomeViewController: UIViewController {
     }
 
     private func configureCollectionViewsConstraints() {
-        gamesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         sliderCollectionView.translatesAutoresizingMaskIntoConstraints = false
 
-        gamesCollectionViewTopConstraint = gamesCollectionView.topAnchor.constraint(equalTo: sliderCollectionView.bottomAnchor, constant: 8)
-        gamesCollectionViewTopConstraint.isActive = true
+        tableViewTopConstraint = tableView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 8)
+        tableViewTopConstraint.isActive = true
     }
 
-    private func configureNotFoundLabel() {
+    private func configureNoDataLabel(_ message: String = "Loading...") {
         view.addSubview(notFoundLabel)
-        notFoundLabel.isHidden = true
+        notFoundLabel.text = message
         NSLayoutConstraint.activate([
             notFoundLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             notFoundLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            ])
+        ])
+    }
+
+    private func hidePageControl() {
+        pageControl.isHidden = true
+    }
+
+    private func setConfigures() {
+        hidePageControl()
+        configureCollectionView()
+        setGradientBackground()
+        configurePageControl()
+        configureCollectionViewsConstraints()
+        configureNoDataLabel()
+        configureTableView()
     }
 
 //MARK: - Prepare segue
@@ -92,7 +101,7 @@ final class HomeViewController: UIViewController {
         }
     }
 
-//MARK: - ScrollView Delegate
+//MARK: - Slider ScrollView Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == sliderCollectionView {
             let page = scrollView.contentOffset.x / scrollView.frame.width
@@ -120,65 +129,79 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == sliderCollectionView {
-            return 3
-        } else {
-            return homeViewModel.numberOfGames
-        }
+        3
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == gamesCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCell
-            cell.configureCell(with: homeViewModel.getResults()[indexPath.row])
-            return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCell", for: indexPath) as! SliderCell
+        if homeViewModel.getFirstThreeImages().count > 0 {
+            cell.configure(with: homeViewModel.getFirstThreeImages()[indexPath.row])
         }
-        else if collectionView == sliderCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCell", for: indexPath) as! SliderCell
-            if homeViewModel.getFirstThreeImages().count > 0 {
-                cell.configure(with: homeViewModel.getFirstThreeImages()[indexPath.row])
-            }
-            return cell
-        }
-        return UICollectionViewCell()
+        return cell
+    }
+}
+
+//MARK: - TableView
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return homeViewModel.numberOfGames
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == gamesCollectionView {
-            gameId = homeViewModel.getGameId(at: indexPath.row)
-            performSegue(withIdentifier: "toDetailVC", sender: nil)
-        }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath) as! GameCell
+        cell.configureCell(with: homeViewModel.getResults()[indexPath.row])
+        return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        gameId = homeViewModel.getGameId(at: indexPath.row)
+        performSegue(withIdentifier: "toDetailVC", sender: nil)
+    }
 }
 
 // MARK: - ViewModelDelegate
 extension HomeViewController: HomeViewModelDelegate {
+    func showNoData() {
+        configureNoDataLabel("No data found.")
+    }
+    
+    func showLoading() {
+        configureNoDataLabel("Loading...")
+    }
+    
+    func hideLoading() {
+        notFoundLabel.isHidden = true
+    }
+    
+    func showPageControl() {
+        pageControl.isHidden = false
+    }
 
     func showSlider() {
-        if gamesCollectionViewTopConstraint != nil {
-            gamesCollectionViewTopConstraint.isActive = false
+        if tableViewTopConstraint != nil {
+            tableViewTopConstraint.isActive = false
         }
-        gamesCollectionViewTopConstraint = gamesCollectionView.topAnchor.constraint(equalTo: sliderCollectionView.bottomAnchor, constant: 8)
-        gamesCollectionViewTopConstraint.isActive = true
+        tableViewTopConstraint = tableView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 8)
+        tableViewTopConstraint.isActive = true
 
         sliderCollectionView.isHidden = false
         pageControl.isHidden = false
     }
 
     func hideSlider() {
-        if gamesCollectionViewTopConstraint != nil {
-            gamesCollectionViewTopConstraint.isActive = false
+        if tableViewTopConstraint != nil {
+            tableViewTopConstraint.isActive = false
         }
-        gamesCollectionViewTopConstraint = gamesCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8)
-        gamesCollectionViewTopConstraint.isActive = true
+        tableViewTopConstraint = tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16)
+        tableViewTopConstraint.isActive = true
 
         sliderCollectionView.isHidden = true
         pageControl.isHidden = true
     }
 
     func reloadGamesCollectionView() {
-        gamesCollectionView.reloadData()
+        tableView.reloadData()
     }
 
     func reloadSliderCollectionView() {
@@ -195,6 +218,7 @@ extension HomeViewController: UISearchBarDelegate {
             showSlider()
         } else {
             if homeViewModel.numberOfGames == 0 {
+                notFoundLabel.text = "No game found!"
                 notFoundLabel.isHidden = false
             } else {
                 notFoundLabel.isHidden = true

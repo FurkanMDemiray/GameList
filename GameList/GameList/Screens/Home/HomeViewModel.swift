@@ -12,6 +12,10 @@ protocol HomeViewModelDelegate: AnyObject {
     func reloadSliderCollectionView()
     func hideSlider()
     func showSlider()
+    func showPageControl()
+    func showLoading()
+    func hideLoading()
+    func showNoData()
 }
 
 protocol HomeViewModelProtocol {
@@ -34,6 +38,7 @@ final class HomeViewModel {
     var imagesURL = [String]()
 
     fileprivate func fetchGames() {
+        self.delegate?.showLoading()
         NetworkManager.shared.fetch(from: Constants.baseUrl, as: GameModel.self) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -45,10 +50,13 @@ final class HomeViewModel {
                         self.imagesURL = results.compactMap { $0.backgroundImage }
                         self.delegate?.reloadGamesCollectionView()
                         self.delegate?.reloadSliderCollectionView()
+                        self.delegate?.showPageControl()
+                        self.delegate?.hideLoading()
                     }
                 }
             case .failure(let error):
                 print("Error", error)
+                self.delegate?.showNoData()
             }
         }
     }

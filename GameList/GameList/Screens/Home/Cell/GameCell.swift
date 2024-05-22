@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class GameCell: UICollectionViewCell {
+class GameCell: UITableViewCell {
 
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var gameImage: UIImageView!
@@ -19,6 +19,7 @@ class GameCell: UICollectionViewCell {
         super.awakeFromNib()
         configureLabels()
         configureGameImage()
+        self.selectionStyle = .none
     }
 
     private func configureLabels() {
