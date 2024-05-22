@@ -33,12 +33,19 @@ class GameCell: UICollectionViewCell {
         gameImage.clipsToBounds = true
     }
 
-    func configureCell(with game: Results) {
-        nameLabel.text = game.name
-        releaseLabel.text = game.released
-        ratingLabel.text = "\(game.rating ?? 0) ★"
-        gameImage.sd_imageIndicator = SDWebImageActivityIndicator.white
-        gameImage.sd_setImage(with: URL(string: game.backgroundImage ?? ""))
+    func configureCell(with game: Results? = nil, model: FavoritesModel? = nil) {
+        if let game = game {
+            nameLabel.text = game.name
+            releaseLabel.text = game.released
+            ratingLabel.text = "\(game.rating ?? 0) ★"
+            gameImage.sd_setImage(with: URL(string: game.backgroundImage ?? ""))
+        }
+        if let model = model {
+            nameLabel.text = model.name
+            releaseLabel.text = model.releaseDate
+            ratingLabel.text = "\(model.score ?? 0) ★"
+            gameImage.sd_setImage(with: URL(string: model.image ?? ""))
+        }
     }
 
 }

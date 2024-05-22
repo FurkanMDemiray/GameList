@@ -8,8 +8,8 @@
 import Foundation
 
 struct FavoritesModel {
-    let name: String
-    let metacritic: Int
-    let releaseDate: String
-    let backgroundImage: String
+    let name: String?
+    let score: Double?
+    let releaseDate: String?
+    let image: String?
 }

@@ -45,10 +45,14 @@ final class DetailViewController: UIViewController {
         return label
     }()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         hideViews()
         setConfigures()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         detailViewModel.load()
     }
 

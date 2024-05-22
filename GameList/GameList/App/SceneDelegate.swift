@@ -25,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         homeViewController.homeViewModel = homeViewModel
 
         guard let favoritesViewController = storyboard.instantiateViewController(withIdentifier: "FavoritesViewController") as? FavoritesViewController else { return }
+        let favoritesViewModel = FavoritesViewModel()
+        favoritesViewController.favoritesViewModel = favoritesViewModel
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [homeViewController, favoritesViewController]

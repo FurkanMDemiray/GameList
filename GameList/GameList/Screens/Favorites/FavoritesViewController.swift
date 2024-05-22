@@ -19,7 +19,12 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }   
+        configureColectionView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        favoritesViewModel.getData()
+    }
 
     private func configureColectionView() {
         collectionView.delegate = self
@@ -31,20 +36,37 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return favoritesViewModel.getNumberOfItems()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as! GameCell
+        let item = favoritesViewModel.getItem(at: indexPath.row)
+        cell.configureCell(model: item)
         return cell
     }
 
-}
-
-extension FavoritesViewController: FavoritesViewModelDelegate {   
-
-    func didFetchData() {
-        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 116)
     }
 
+    func collectionView(_ collectionView: UICollectionView, trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.trailingSwipeActionsConfigurationProvider = { indexPath in
+            let del = UIContextualAction(style: .destructive, title: "Delete") {
+                [weak self] action, view, completion in
+                self?.favoritesViewModel.deleteItem(at: indexPath.row)
+                completion(true)
+            }
+            return UISwipeActionsConfiguration(actions: [del])
+        }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+}
+
+extension FavoritesViewController: FavoritesViewModelDelegate {
+    func reloadCollectionView() {
+        collectionView.reloadData()
+    }
 }
