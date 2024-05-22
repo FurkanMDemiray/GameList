@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SDWebImage
 import CoreData
 
 // MARK: - Delegate
@@ -29,7 +28,7 @@ protocol DetailViewModelProtocol {
     var delegate: DetailViewModelDelegate? { get set }
 
     func load()
-    func getBackgroundImage() -> UIImage?
+    func getBackgroundImage() -> String?
     func getName() -> String?
     func getMetaCritic() -> Int?
     func getReleaseDate() -> String?
@@ -48,7 +47,7 @@ final class DetailViewModel {
     private var name: String?
     private var metaCritic: Int?
     private var releaseDate: String?
-    private var backgroundImage = UIImageView()
+    private var backgroundImage: String?
     private var platforms = [String]()
     private var gameID: Int
     private var description: String?
@@ -60,14 +59,6 @@ final class DetailViewModel {
 
     init(gameID: Int) {
         self.gameID = gameID
-    }
-
-    fileprivate func getBackgroundImage(url: String, completion: @escaping (UIImage?) -> Void) {
-        if let url = URL(string: url) {
-            SDWebImageDownloader.shared.downloadImage(with: url) { image, _, _, _ in
-                completion(image)
-            }
-        }
     }
 
     fileprivate func checkPlatforms() {
@@ -101,10 +92,7 @@ final class DetailViewModel {
                         self.platforms.append(platform.platform?.name ?? "")
                     }
                     self.checkPlatforms()
-                    self.getBackgroundImage(url: detail.backgroundImage ?? "") { image in
-                        self.backgroundImage.image = image
-                        self.delegate?.reloadImage()
-                    }
+                    self.backgroundImage = detail.backgroundImage
                     self.delegate?.detailViewModelDidFetchData()
                     self.delegate?.hideNodata()
                     self.delegate?.showViews()
@@ -136,7 +124,7 @@ final class DetailViewModel {
 extension DetailViewModel: DetailViewModelProtocol {
 
     func isLiked() -> Bool {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        /*let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LikedGames")
         request.predicate = NSPredicate(format: "name = %@", name!)
         do {
@@ -148,11 +136,12 @@ extension DetailViewModel: DetailViewModelProtocol {
             print("Error: \(error)")
         }
         return false
-        self.delegate?.detailViewModelDidFetchData()
+        self.delegate?.detailViewModelDidFetchData()*/
+        return false
     }
 
     func dislikeGame() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        /*let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LikedGames")
         request.predicate = NSPredicate(format: "name = %@", name!)
         do {
@@ -164,11 +153,11 @@ extension DetailViewModel: DetailViewModelProtocol {
             }
         } catch {
             print("Error: \(error)")
-        }
+        }*/
     }
 
     func likeGame() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+      /*  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         if let entity = NSEntityDescription.entity(forEntityName: "LikedGames", in: context) {
             let newLikedGame = NSManagedObject(entity: entity, insertInto: context)
             newLikedGame.setValue(name, forKey: "name")
@@ -183,7 +172,7 @@ extension DetailViewModel: DetailViewModelProtocol {
             }
         } else {
             print("Failed to create entity description")
-        }
+        }*/
     }
 
     func goToMetacritic() {
@@ -226,8 +215,8 @@ extension DetailViewModel: DetailViewModelProtocol {
         releaseDate
     }
 
-    func getBackgroundImage() -> UIImage? {
-        backgroundImage.image
+    func getBackgroundImage() -> String? {
+        backgroundImage
     }
 
     func load() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SliderCell: UICollectionViewCell {
 
@@ -25,7 +26,8 @@ class SliderCell: UICollectionViewCell {
         sliderImage.widthAnchor.constraint(equalToConstant: screenWidth - 16).isActive = true
     }
 
-    func configure(with image: UIImage) {
-        sliderImage.image = image
+    func configure(with image: String) {
+        sliderImage.sd_imageIndicator = SDWebImageActivityIndicator.white
+        sliderImage.sd_setImage(with: URL(string: image))
     }
 }

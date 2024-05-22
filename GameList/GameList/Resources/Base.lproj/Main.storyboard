@@ -183,7 +183,7 @@
                                     <constraint firstItem="HFm-hU-mq0" firstAttribute="top" secondItem="BdK-UI-NuC" secondAttribute="top" id="v70-yl-KbA"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9g-fB-Tj6">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9g-fB-Tj6">
                                 <rect key="frame" x="0.0" y="316" width="430" height="616"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-L9-y5A">
@@ -329,6 +329,7 @@
                         <outlet property="readMoreBtn" destination="GTF-l2-juK" id="8I0-dB-ACA"/>
                         <outlet property="redditLinkLabel" destination="nSp-nU-Kn5" id="1Ih-a5-iNs"/>
                         <outlet property="releaseDateLabel" destination="rbM-43-d3Y" id="gaV-X4-JDO"/>
+                        <outlet property="scrollView" destination="u9g-fB-Tj6" id="RJ8-Jc-SmN"/>
                         <outlet property="xboxLabel" destination="I1E-dq-giv" id="hyS-20-xZZ"/>
                     </connections>
                 </viewController>
@@ -343,11 +344,42 @@
                     <view key="view" contentMode="scaleToFill" id="qdZ-K3-bId">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5wc-of-W38">
+                                <rect key="frame" x="0.0" y="59" width="430" height="790"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Y3Q-Mp-SqR">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="DaQ-5i-91t">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ngc-Aw-dIa">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="mxH-K7-tGH"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mxH-K7-tGH" firstAttribute="trailing" secondItem="5wc-of-W38" secondAttribute="trailing" id="2w1-QO-3Da"/>
+                            <constraint firstItem="5wc-of-W38" firstAttribute="top" secondItem="mxH-K7-tGH" secondAttribute="top" id="SXF-Km-aCw"/>
+                            <constraint firstItem="5wc-of-W38" firstAttribute="leading" secondItem="mxH-K7-tGH" secondAttribute="leading" id="ccy-42-pR9"/>
+                            <constraint firstItem="mxH-K7-tGH" firstAttribute="bottom" secondItem="5wc-of-W38" secondAttribute="bottom" id="i3X-Pe-P6j"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="rka-da-uNk"/>
                     <navigationItem key="navigationItem" id="2fF-0S-U3a"/>
+                    <connections>
+                        <outlet property="collectionView" destination="5wc-of-W38" id="9mC-Rl-Vcw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZM-uj-2a3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

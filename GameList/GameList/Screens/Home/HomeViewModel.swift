@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SDWebImage
 
 protocol HomeViewModelDelegate: AnyObject {
     func reloadGamesCollectionView()
@@ -22,7 +21,7 @@ protocol HomeViewModelProtocol {
     func load()
     func getGameModel() -> GameModel?
     func getResults() -> [Results]
-    func getFirstThreeImages() -> [UIImage]
+    func getFirstThreeImages() -> [String]
     func searchGames(with text: String)
     func getGameId(at index: Int) -> Int
 }
@@ -32,27 +31,7 @@ final class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
     var game: GameModel?
     var results = [Results]()
-    var images = [UIImage]()
-
-    fileprivate func getFirstThreeImages(urls: [String], completion: @escaping ([UIImage]) -> Void) {
-        var images = Array<UIImage?>(repeating: nil, count: min(3, urls.count))
-        let dispatchGroup = DispatchGroup()
-
-        for i in 0..<min(3, urls.count) {
-            if let url = URL(string: urls[i]) {
-                dispatchGroup.enter()
-                SDWebImageDownloader.shared.downloadImage(with: url) { image, _, _, _ in
-                    if let image = image {
-                        images[i] = image
-                    }
-                    dispatchGroup.leave()
-                }
-            }
-        }
-        dispatchGroup.notify(queue: .main) {
-            completion(images.compactMap { $0 })
-        }
-    }
+    var imagesURL = [String]()
 
     fileprivate func fetchGames() {
         NetworkManager.shared.fetch(from: Constants.baseUrl, as: GameModel.self) { [weak self] result in
@@ -63,11 +42,9 @@ final class HomeViewModel {
                     self.game = game
                     if let results = game.results {
                         self.results = results
+                        self.imagesURL = results.compactMap { $0.backgroundImage }
                         self.delegate?.reloadGamesCollectionView()
-                        self.getFirstThreeImages(urls: results.map { $0.backgroundImage ?? "" }) { images in
-                            self.images = images
-                            self.delegate?.reloadSliderCollectionView()
-                        }
+                        self.delegate?.reloadSliderCollectionView()
                     }
                 }
             case .failure(let error):
@@ -97,8 +74,8 @@ extension HomeViewModel: HomeViewModelProtocol {
         delegate?.reloadGamesCollectionView()
     }
 
-    func getFirstThreeImages() -> [UIImage] {
-        images
+    func getFirstThreeImages() -> [String] {
+        Array(imagesURL.prefix(3))
     }
 
     func load() {

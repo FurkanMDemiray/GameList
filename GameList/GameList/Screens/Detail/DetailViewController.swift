@@ -7,10 +7,12 @@
 
 import UIKit
 import SafariServices
+import SDWebImage
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
 
 //MARK: - Outlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var platformsLabel: UILabel!
     @IBOutlet weak var metacriticLinkLabel: UILabel!
     @IBOutlet weak var redditLinkLabel: UILabel!
@@ -107,22 +109,12 @@ class DetailViewController: UIViewController {
         likeImage.addGestureRecognizer(tap)
     }
 
-    private func setConfigures() {
-        configureBackgroundImage()
-        configureBackImage()
-        configureLabels()
-        configureDescriptionLabel()
-        configureReadMoreBtn()
-        configureLinkLabels()
-        configureLikeImage()
-    }
-
 //MARK: - Update View
     func updateView() {
         nameLabel.text = detailViewModel?.getName()
         metascoreLabel.text = "Metacritic: \(detailViewModel?.getMetaCritic() ?? 0)"
         releaseDateLabel.text = detailViewModel?.getReleaseDate()
-        gameImage.image = detailViewModel?.getBackgroundImage()
+        gameImage.sd_setImage(with: URL(string: detailViewModel.getBackgroundImage() ?? ""))
         descriptionLabel.text = detailViewModel?.getDescription()
     }
 
@@ -155,6 +147,7 @@ class DetailViewController: UIViewController {
         } else {
             readMoreBtn.setTitle("Read More", for: .normal)
             collapseDescriptionLabel()
+            scrollToTop()
         }
     }
 
@@ -175,6 +168,52 @@ class DetailViewController: UIViewController {
             detailViewModel.likeGame()
         }
     }
+}
+
+//MARK: - Methods
+extension DetailViewController {
+
+    private func setConfigures() {
+        configureBackgroundImage()
+        configureBackImage()
+        configureLabels()
+        configureDescriptionLabel()
+        configureReadMoreBtn()
+        configureLinkLabels()
+        configureLikeImage()
+    }
+
+    private func scrollToTop() {
+        if let scrollView = view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView {
+            scrollView.setContentOffset(.zero, animated: true)
+        }
+    }
+
+    private func hideViews() {
+        xboxLabel.isHidden = true
+        pcLabel.isHidden = true
+        psImage.isHidden = true
+        nameLabel.isHidden = true
+        metascoreLabel.isHidden = true
+        releaseDateLabel.isHidden = true
+        gameImage.isHidden = true
+        likeImage.isHidden = true
+        aboutGameLabel.isHidden = true
+        descriptionLabel.isHidden = true
+        readMoreBtn.isHidden = true
+        metacriticLinkLabel.isHidden = true
+        redditLinkLabel.isHidden = true
+        platformsLabel.isHidden = true
+    }
+
+    private func checkIfLiked() {
+        if detailViewModel.isLiked() {
+            likeImage.image = UIImage(systemName: "heart.fill")
+        } else {
+            likeImage.image = UIImage(systemName: "heart")
+        }
+    }
+
 }
 
 // MARK: - DetailViewModelDelegate
@@ -220,23 +259,6 @@ extension DetailViewController: DetailViewModelDelegate {
         platformsLabel.isHidden = false
     }
 
-    private func hideViews() {
-        xboxLabel.isHidden = true
-        pcLabel.isHidden = true
-        psImage.isHidden = true
-        nameLabel.isHidden = true
-        metascoreLabel.isHidden = true
-        releaseDateLabel.isHidden = true
-        gameImage.isHidden = true
-        likeImage.isHidden = true
-        aboutGameLabel.isHidden = true
-        descriptionLabel.isHidden = true
-        readMoreBtn.isHidden = true
-        metacriticLinkLabel.isHidden = true
-        redditLinkLabel.isHidden = true
-        platformsLabel.isHidden = true
-    }
-
     func showXbox() {
         xboxLabel.isHidden = false
     }
@@ -250,16 +272,12 @@ extension DetailViewController: DetailViewModelDelegate {
     }
 
     func reloadImage() {
-        gameImage.image = detailViewModel.getBackgroundImage()
+        gameImage.sd_setImage(with: URL(string: detailViewModel.getBackgroundImage() ?? ""))
     }
 
     func detailViewModelDidFetchData() {
         updateView()
-        if detailViewModel.isLiked() {
-            likeImage.image = UIImage(systemName: "heart.fill")
-        } else {
-            likeImage.image = UIImage(systemName: "heart")
-        }
+        checkIfLiked()
     }
 }
 

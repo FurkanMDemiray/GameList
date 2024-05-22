@@ -34,6 +34,8 @@
 		DD7E2CBC2BFCDE1900ECAAFB /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CBB2BFCDE1900ECAAFB /* FavoritesViewController.swift */; };
 		DD7E2CBE2BFCED4A00ECAAFB /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CBD2BFCED4A00ECAAFB /* DetailViewModel.swift */; };
 		DD7E2CC02BFCEE4000ECAAFB /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CBF2BFCEE4000ECAAFB /* DetailModel.swift */; };
+		DD7E2CC22BFE7DC200ECAAFB /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */; };
+		DD7E2CC42BFE7DEB00ECAAFB /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC32BFE7DEB00ECAAFB /* FavoritesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		DD7E2CBB2BFCDE1900ECAAFB /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		DD7E2CBD2BFCED4A00ECAAFB /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		DD7E2CBF2BFCEE4000ECAAFB /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
+		DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		DD7E2CC32BFE7DEB00ECAAFB /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				DD7E2CBB2BFCDE1900ECAAFB /* FavoritesViewController.swift */,
+				DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */,
+				DD7E2CC32BFE7DEB00ECAAFB /* FavoritesModel.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -310,11 +316,13 @@
 				DD66514C2BFBE33200E4FA4A /* UIViewControllerExtension.swift in Sources */,
 				DD6651502BFC048800E4FA4A /* SliderCell.swift in Sources */,
 				DD66511E2BF910B000E4FA4A /* HexToColorExtension.swift in Sources */,
+				DD7E2CC22BFE7DC200ECAAFB /* FavoritesViewModel.swift in Sources */,
 				DD6650F42BF7F60A00E4FA4A /* SceneDelegate.swift in Sources */,
 				DD6650FC2BF7F60A00E4FA4A /* GameList.xcdatamodeld in Sources */,
 				DD7E2CBC2BFCDE1900ECAAFB /* FavoritesViewController.swift in Sources */,
 				DD7E2CC02BFCEE4000ECAAFB /* DetailModel.swift in Sources */,
 				DD19182B2BFC18ED00CEAB6F /* DetailViewController.swift in Sources */,
+				DD7E2CC42BFE7DEB00ECAAFB /* FavoritesModel.swift in Sources */,
 				DD7E2CBE2BFCED4A00ECAAFB /* DetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
