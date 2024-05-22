@@ -165,8 +165,14 @@ final class DetailViewController: UIViewController {
 
     @objc func likeImageTapped() {
         if detailViewModel.isLiked() {
-            likeImage.image = UIImage(systemName: "heart")
-            detailViewModel.dislikeGame()
+            let alert = UIAlertController(title: "Are you sure?", message: "Do you want to remove this game from your liked games?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                self.likeImage.image = UIImage(systemName: "heart")
+                self.detailViewModel.dislikeGame()
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+
         } else {
             likeImage.image = UIImage(systemName: "heart.fill")
             detailViewModel.likeGame()
