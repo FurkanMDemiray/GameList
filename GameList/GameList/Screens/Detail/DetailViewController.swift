@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailViewController: UIViewController {
 
 //MARK: - Outlets
+    @IBOutlet weak var metacriticLinkLabel: UILabel!
+    @IBOutlet weak var redditLinkLabel: UILabel!
     @IBOutlet weak var readMoreBtn: UIButton!
     @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var aboutGameLabel: UILabel!
@@ -87,12 +90,23 @@ class DetailViewController: UIViewController {
         readMoreBtn.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
     }
 
+    private func configureLinkLabels() {
+        metacriticLinkLabel.isUserInteractionEnabled = true
+        let metacriticTap = UITapGestureRecognizer(target: self, action: #selector(metacriticLinkTapped))
+        metacriticLinkLabel.addGestureRecognizer(metacriticTap)
+
+        redditLinkLabel.isUserInteractionEnabled = true
+        let redditTap = UITapGestureRecognizer(target: self, action: #selector(redditLinkTapped))
+        redditLinkLabel.addGestureRecognizer(redditTap)
+    }
+
     private func setConfigures() {
         configureBackgroundImage()
         configureBackImage()
         configureLabels()
         configureDescriptionLabel()
         configureReadMoreBtn()
+        configureLinkLabels()
     }
 
 //MARK: - Update View
@@ -135,10 +149,29 @@ class DetailViewController: UIViewController {
             collapseDescriptionLabel()
         }
     }
+
+    @objc func metacriticLinkTapped() {
+        detailViewModel.goToMetacritic()
+    }
+
+    @objc func redditLinkTapped() {
+        detailViewModel.goToReddit()
+    }
 }
 
 // MARK: - DetailViewModelDelegate
 extension DetailViewController: DetailViewModelDelegate {
+
+    func getWebsite(from url: String) {
+        if let url = URL(string: url) {
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true)
+        }
+        else {
+            showAlert(title: "Error", message: "No URL available.")
+        }
+    }
+
     func showError() {
         configureNoDataLabel("Error")
     }

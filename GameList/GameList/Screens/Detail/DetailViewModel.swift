@@ -8,6 +8,8 @@
 import Foundation
 import SDWebImage
 
+
+// MARK: - Delegate
 protocol DetailViewModelDelegate: AnyObject {
     func detailViewModelDidFetchData()
     func showNoData()
@@ -19,8 +21,10 @@ protocol DetailViewModelDelegate: AnyObject {
     func showXbox()
     func showPC()
     func showPS()
+    func getWebsite(from url: String)
 }
 
+// MARK: - Protocol
 protocol DetailViewModelProtocol {
     var delegate: DetailViewModelDelegate? { get set }
 
@@ -30,8 +34,11 @@ protocol DetailViewModelProtocol {
     func getMetaCritic() -> Int?
     func getReleaseDate() -> String?
     func getDescription() -> String?
+    func goToMetacritic()
+    func goToReddit()
 }
 
+// MARK: - ViewModel
 final class DetailViewModel {
 
     weak var delegate: DetailViewModelDelegate?
@@ -45,6 +52,8 @@ final class DetailViewModel {
     private var retryCount = 0
     private let maxRetries = 3
     private let retryDelay: TimeInterval = 2.0
+    private var metacriticURL: String?
+    private var redditURL: String?
 
     init(gameID: Int) {
         self.gameID = gameID
@@ -83,6 +92,8 @@ final class DetailViewModel {
                     self.releaseDate = detail.released
                     self.name = detail.name
                     self.description = detail.description
+                    self.metacriticURL = detail.metacriticURL
+                    self.redditURL = detail.redditURL
                     for platform in detail.platforms! {
                         self.platforms.append(platform.platform?.name ?? "")
                     }
@@ -120,6 +131,19 @@ final class DetailViewModel {
 
 // MARK: - DetailViewModelProtocol
 extension DetailViewModel: DetailViewModelProtocol {
+
+    func goToMetacritic() {
+        if let url = metacriticURL {
+            delegate?.getWebsite(from: url)
+        }
+    }
+
+    func goToReddit() {
+        if let url = redditURL {
+            delegate?.getWebsite(from: url)
+        }
+    }
+
     func getDescription() -> String? {
         for words in description!.components(separatedBy: " ") {
             if words.contains("<p>") || words.contains("</p>") || words.contains("<br>") || words.contains("<br />") {
