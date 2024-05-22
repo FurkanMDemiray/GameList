@@ -31,7 +31,8 @@ class NetworkManager {
                 return
             }
 
-            guard let response = response as? HTTPURLResponse else {
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("Response: \(urlString)")
                 completion(.failure(.invalidResponse))
                 return
             }

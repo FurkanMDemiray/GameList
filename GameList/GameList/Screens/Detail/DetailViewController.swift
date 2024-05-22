@@ -10,6 +10,8 @@ import UIKit
 class DetailViewController: UIViewController {
 
 //MARK: - Outlets
+    @IBOutlet weak var readMoreBtn: UIButton!
+    @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var aboutGameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var xboxLabel: UIImageView!
@@ -30,7 +32,7 @@ class DetailViewController: UIViewController {
 
     let noDataLabel: UILabel = {
         let label = UILabel()
-        label.text = "No Data"
+        label.text = "Loading..."
         label.font = UIFont(name: "OldGameFatty", size: 24)
         label.textColor = .white
         label.textAlignment = .center
@@ -40,11 +42,8 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideViews()
-        configureBackgroundImage()
-        configureBackImage()
-        configureLabels()
+        setConfigures()
         detailViewModel.load()
-        //configureDescriptionLabel()
     }
 
 //MARK: - Configure Views
@@ -67,17 +66,33 @@ class DetailViewController: UIViewController {
         releaseDateLabel.font = UIFont(name: "OldGameFatty", size: 20)
     }
 
-    private func configureNoDataLabel() {
+    private func configureNoDataLabel(_ message: String = "Loading...") {
         noDataLabel.frame = view.bounds
         view.addSubview(noDataLabel)
     }
 
     private func configureDescriptionLabel() {
-        view.addSubview(descriptionLabel)
+        innerView.addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.topAnchor.constraint(equalTo: aboutGameLabel.bottomAnchor, constant: 16).isActive = true
         descriptionLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         descriptionLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        descriptionLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+
+    private func configureReadMoreBtn() {
+        innerView.addSubview(readMoreBtn)
+        readMoreBtn.translatesAutoresizingMaskIntoConstraints = false
+        readMoreBtn.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8).isActive = true
+        readMoreBtn.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+    }
+
+    private func setConfigures() {
+        configureBackgroundImage()
+        configureBackImage()
+        configureLabels()
+        configureDescriptionLabel()
+        configureReadMoreBtn()
     }
 
 //MARK: - Update View
@@ -89,18 +104,48 @@ class DetailViewController: UIViewController {
         descriptionLabel.text = detailViewModel?.getDescription()
     }
 
+//MARK: - Expand/Collapse Description Label
+    private func expandDescriptionLabel() {
+        UIView.animate(withDuration: 0.3) {
+            NSLayoutConstraint.deactivate(self.descriptionLabel.constraints.filter { $0.firstAttribute == .height })
+            self.descriptionLabel.heightAnchor.constraint(equalToConstant: self.descriptionLabel.intrinsicContentSize.height).isActive = true
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    private func collapseDescriptionLabel() {
+        UIView.animate(withDuration: 0.3) {
+            NSLayoutConstraint.deactivate(self.descriptionLabel.constraints.filter { $0.firstAttribute == .height })
+            self.descriptionLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            self.view.layoutIfNeeded()
+        }
+    }
+
 //MARK: - Actions
     @objc func backButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
 
     @IBAction func readMoreBtnClicked(_ sender: Any) {
-
+        if readMoreBtn.titleLabel?.text == "Read More" {
+            readMoreBtn.setTitle("Read Less", for: .normal)
+            expandDescriptionLabel()
+        } else {
+            readMoreBtn.setTitle("Read More", for: .normal)
+            collapseDescriptionLabel()
+        }
     }
 }
 
 // MARK: - DetailViewModelDelegate
 extension DetailViewController: DetailViewModelDelegate {
+    func showError() {
+        configureNoDataLabel("Error")
+    }
+
+    func hideError() {
+        noDataLabel.isHidden = true
+    }
 
     func showNoData() {
         configureNoDataLabel()

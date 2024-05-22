@@ -39,6 +39,10 @@ class HomeViewController: UIViewController {
         configurePageControl()
         configureCollectionViewsConstraints()
         configureNotFoundLabel()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         homeViewModel.load()
     }
 

@@ -12,6 +12,8 @@ protocol DetailViewModelDelegate: AnyObject {
     func detailViewModelDidFetchData()
     func showNoData()
     func hideNodata()
+    func showError()
+    func hideError()
     func showViews()
     func reloadImage()
     func showXbox()
@@ -92,9 +94,11 @@ final class DetailViewModel {
                     self.delegate?.detailViewModelDidFetchData()
                     self.delegate?.hideNodata()
                     self.delegate?.showViews()
+                    self.delegate?.hideError()
                 }
             case .failure(let error):
                 print(error)
+                self.delegate?.showError()
                 self.retryFetchGames()
             }
         }

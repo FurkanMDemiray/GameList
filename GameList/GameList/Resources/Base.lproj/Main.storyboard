@@ -194,17 +194,15 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5t-qp-lNl">
-                                                <rect key="frame" x="16" y="60.666666666666686" width="398" height="200"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="reO-b3-exE"/>
-                                                </constraints>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5t-qp-lNl">
+                                                <rect key="frame" x="16" y="60.666666666666693" width="45.666666666666657" height="22.333333333333336"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTF-l2-juK">
-                                                <rect key="frame" x="307.66666666666669" y="268.66666666666663" width="106.33333333333331" height="34.333333333333314"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTF-l2-juK">
+                                                <rect key="frame" x="307.66666666666669" y="91" width="106.33333333333331" height="34.333333333333343"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Read More"/>
                                                 <connections>
@@ -215,13 +213,9 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="GTF-l2-juK" secondAttribute="trailing" constant="16" id="1aR-2O-gUt"/>
-                                            <constraint firstItem="GTF-l2-juK" firstAttribute="top" secondItem="J5t-qp-lNl" secondAttribute="bottom" constant="8" id="71S-O9-uTm"/>
                                             <constraint firstItem="U9N-x2-2e4" firstAttribute="leading" secondItem="sBB-L9-y5A" secondAttribute="leading" constant="16" id="FIw-Uu-csd"/>
-                                            <constraint firstItem="J5t-qp-lNl" firstAttribute="top" secondItem="U9N-x2-2e4" secondAttribute="bottom" constant="16" id="Juq-Ob-LS6"/>
                                             <constraint firstAttribute="trailing" secondItem="U9N-x2-2e4" secondAttribute="trailing" constant="16" id="eAx-jJ-Sp3"/>
-                                            <constraint firstItem="J5t-qp-lNl" firstAttribute="leading" secondItem="sBB-L9-y5A" secondAttribute="leading" constant="16" id="erj-kp-3oi"/>
                                             <constraint firstItem="U9N-x2-2e4" firstAttribute="top" secondItem="sBB-L9-y5A" secondAttribute="top" constant="16" id="iS1-XW-swF"/>
-                                            <constraint firstAttribute="trailing" secondItem="J5t-qp-lNl" secondAttribute="trailing" constant="16" id="l4b-we-avT"/>
                                             <constraint firstAttribute="height" constant="1200" id="tgT-ux-L34"/>
                                         </constraints>
                                     </view>
@@ -287,11 +281,13 @@
                         <outlet property="backImage" destination="795-8E-XrY" id="cmO-cp-1f4"/>
                         <outlet property="descriptionLabel" destination="J5t-qp-lNl" id="2hM-Hc-x7n"/>
                         <outlet property="gameImage" destination="HFm-hU-mq0" id="o3g-9G-ZOL"/>
+                        <outlet property="innerView" destination="sBB-L9-y5A" id="MhM-LA-sUL"/>
                         <outlet property="likeImage" destination="fNT-0Q-Cmd" id="jIR-hG-25k"/>
                         <outlet property="metascoreLabel" destination="QML-Pm-tR1" id="Ffh-ow-8xh"/>
                         <outlet property="nameLabel" destination="IVK-aY-bwD" id="ZuG-DA-9j7"/>
                         <outlet property="pcLabel" destination="TsG-Pt-TDu" id="TNp-XK-34b"/>
                         <outlet property="psImage" destination="02E-BC-wrW" id="obQ-r0-Pvr"/>
+                        <outlet property="readMoreBtn" destination="GTF-l2-juK" id="8I0-dB-ACA"/>
                         <outlet property="releaseDateLabel" destination="rbM-43-d3Y" id="gaV-X4-JDO"/>
                         <outlet property="xboxLabel" destination="I1E-dq-giv" id="hyS-20-xZZ"/>
                     </connections>
