@@ -16,6 +16,7 @@ class FavoritesViewController: UIViewController {
             favoritesViewModel.delegate = self
         }
     }
+    private var gameId: Int?
 
     var noDataLabel: UILabel = {
         let label = UILabel()
@@ -86,6 +87,11 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         delete.backgroundColor = .systemBlue
         return UISwipeActionsConfiguration(actions: [delete])
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        gameId = favoritesViewModel.getGameID(name: favoritesViewModel.getItem(at: indexPath.row).name ?? "")
+        performSegue(withIdentifier: "favoriteToDetail", sender: nil)
+    }
 }
 
 // MARK: - FavoritesViewModelDelegate
@@ -96,5 +102,15 @@ extension FavoritesViewController: FavoritesViewModelDelegate {
 
     func reloadTableView() {
         tableView.reloadData()
+    }
+}
+
+// MARK: - Navigation
+extension FavoritesViewController{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "favoriteToDetail" {
+            let destinationVC = segue.destination as! DetailViewController
+            destinationVC.detailViewModel = DetailViewModel(gameID: gameId ?? 0)
+        }
     }
 }

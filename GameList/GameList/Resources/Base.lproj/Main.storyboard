@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2871.6279069767443" y="-565.23605150214598"/>
+            <point key="canvasLocation" x="2069" y="-808"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="EA8-jN-z7B">
@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rl-Sw-LXE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3761.8604651162791" y="-565.23605150214598"/>
+            <point key="canvasLocation" x="2925" y="-809"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="AKA-2D-nyh">
@@ -352,11 +352,39 @@
                     <navigationItem key="navigationItem" id="2fF-0S-U3a"/>
                     <connections>
                         <outlet property="tableView" destination="8Ov-f2-3Po" id="dFM-8V-qp1"/>
+                        <segue destination="EfS-pH-B8u" kind="presentation" identifier="favoriteToDetail" modalPresentationStyle="fullScreen" id="05E-w8-Ksb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZM-uj-2a3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2872" y="133"/>
+            <point key="canvasLocation" x="2068" y="-144"/>
+        </scene>
+        <!--Gemini AI-->
+        <scene sceneID="oVT-Gs-ZmU">
+            <objects>
+                <viewController storyboardIdentifier="GeminiViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PtO-2g-BAM" customClass="GeminiViewController" customModule="GameList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xub-Ue-S26">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygb-ap-ZA3">
+                                <rect key="frame" x="257" y="205" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button">
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XZ7-Yc-ra5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Gemini AI" image="ai" id="Zn8-gE-O09"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xiS-sc-0S3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2068" y="548"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9XF-qG-hVy">
@@ -367,24 +395,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="systemBlueColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="zsm-mQ-OqN"/>
                         <segue destination="kBk-3U-hpq" kind="relationship" relationship="viewControllers" id="L4K-JM-xIY"/>
+                        <segue destination="PtO-2g-BAM" kind="relationship" relationship="viewControllers" id="p60-FN-tbz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HSd-3K-RZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1970.2325581395348" y="-289.69957081545067"/>
+            <point key="canvasLocation" x="1113" y="-144"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="05E-w8-Ksb"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="ai" width="32" height="32"/>
         <image name="back" width="32" height="32"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="ps" width="64" height="64"/>
         <image name="xbox" width="64" height="64"/>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

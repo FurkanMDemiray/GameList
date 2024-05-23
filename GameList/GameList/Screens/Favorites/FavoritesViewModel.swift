@@ -20,6 +20,7 @@ protocol FavoritesViewModelProtocol {
     func getNumberOfItems() -> Int
     func getItem(at index: Int) -> FavoritesModel
     func deleteItem(at index: Int)
+    func getGameID(name: String) -> Int
 }
 
 final class FavoritesViewModel {
@@ -56,6 +57,15 @@ final class FavoritesViewModel {
 }
 
 extension FavoritesViewModel: FavoritesViewModelProtocol {
+
+    func getGameID(name: String) -> Int {
+        for (key, value) in GameNameID.dict {
+            if key == name {
+                return value
+            }
+        }
+        return 0
+    }
 
     func deleteItem(at index: Int) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGames")

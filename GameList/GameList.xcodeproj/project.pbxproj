@@ -37,6 +37,8 @@
 		DD7E2CC72BFE84A500ECAAFB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */; };
 		DD7E2CC92BFE8AA700ECAAFB /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CC82BFE8AA700ECAAFB /* FavoritesModel.swift */; };
 		DD7E2CCB2BFEAB3800ECAAFB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CCA2BFEAB3800ECAAFB /* GradientExtension.swift */; };
+		DD7E2CCE2BFEB12F00ECAAFB /* GeminiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CCD2BFEB12F00ECAAFB /* GeminiViewController.swift */; };
+		DD7E2CD02BFFC65700ECAAFB /* GameNameID.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CCF2BFFC65700ECAAFB /* GameNameID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DD7E2CC82BFE8AA700ECAAFB /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
 		DD7E2CCA2BFEAB3800ECAAFB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
+		DD7E2CCD2BFEB12F00ECAAFB /* GeminiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiViewController.swift; sourceTree = "<group>"; };
+		DD7E2CCF2BFFC65700ECAAFB /* GameNameID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNameID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 		DD6651112BF9071A00E4FA4A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				DD7E2CCC2BFEB11400ECAAFB /* Gemini */,
 				DD7E2CBA2BFCDE0C00ECAAFB /* Favorites */,
 				DD6651132BF9072A00E4FA4A /* Detail */,
 				DD6651122BF9072100E4FA4A /* Home */,
@@ -219,6 +224,7 @@
 				DD7E2CBB2BFCDE1900ECAAFB /* FavoritesViewController.swift */,
 				DD7E2CC12BFE7DC200ECAAFB /* FavoritesViewModel.swift */,
 				DD7E2CC82BFE8AA700ECAAFB /* FavoritesModel.swift */,
+				DD7E2CCF2BFFC65700ECAAFB /* GameNameID.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -230,6 +236,14 @@
 				DD7E2CC62BFE84A500ECAAFB /* CoreDataManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		DD7E2CCC2BFEB11400ECAAFB /* Gemini */ = {
+			isa = PBXGroup;
+			children = (
+				DD7E2CCD2BFEB12F00ECAAFB /* GeminiViewController.swift */,
+			);
+			path = Gemini;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +334,7 @@
 				DD66514A2BFBC4C500E4FA4A /* HomeViewModel.swift in Sources */,
 				DD6651482BFBAAD400E4FA4A /* Constants.swift in Sources */,
 				DD7E2CC92BFE8AA700ECAAFB /* FavoritesModel.swift in Sources */,
+				DD7E2CCE2BFEB12F00ECAAFB /* GeminiViewController.swift in Sources */,
 				DD6650F22BF7F60A00E4FA4A /* AppDelegate.swift in Sources */,
 				DD66511C2BF90F6300E4FA4A /* GameCell.swift in Sources */,
 				DD6651092BF7F63000E4FA4A /* NetworkManager.swift in Sources */,
@@ -332,6 +347,7 @@
 				DD6650FC2BF7F60A00E4FA4A /* GameList.xcdatamodeld in Sources */,
 				DD7E2CBC2BFCDE1900ECAAFB /* FavoritesViewController.swift in Sources */,
 				DD7E2CCB2BFEAB3800ECAAFB /* GradientExtension.swift in Sources */,
+				DD7E2CD02BFFC65700ECAAFB /* GameNameID.swift in Sources */,
 				DD7E2CC02BFCEE4000ECAAFB /* DetailModel.swift in Sources */,
 				DD19182B2BFC18ED00CEAB6F /* DetailViewController.swift in Sources */,
 				DD7E2CC72BFE84A500ECAAFB /* CoreDataManager.swift in Sources */,

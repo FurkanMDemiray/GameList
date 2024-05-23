@@ -109,21 +109,6 @@ final class HomeViewController: UIViewController {
             pageControl.currentPage = Int(page)
         }
     }
-
-    /*private func getAı() async {
-
-        let model = GenerativeModel(name: "gemini-pro", apiKey: Constants.geminiAPIKey)
-
-        let prompt = "Write a short description about a \(gameName!) game."
-        do {
-            let response = try await model.generateContent(prompt)
-            if let text = response.text {
-                print(text)
-            }
-        } catch {
-            print(error)
-        }
-    }*/
 }
 
 //MARK: - CollectionView

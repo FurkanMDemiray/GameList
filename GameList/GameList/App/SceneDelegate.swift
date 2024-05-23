@@ -28,8 +28,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let favoritesViewModel = FavoritesViewModel()
         favoritesViewController.favoritesViewModel = favoritesViewModel
 
+        guard let geminiViewController = storyboard.instantiateViewController(withIdentifier: "GeminiViewController") as? GeminiViewController else { return }
+
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeViewController, favoritesViewController]
+        tabBarController.viewControllers = [homeViewController, favoritesViewController, geminiViewController]
 
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
