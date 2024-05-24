@@ -48,7 +48,6 @@ final class HomeViewModel {
                     if let results = game.results {
                         self.results = results
                         self.imagesURL = results.compactMap { $0.backgroundImage }
-                        GeminiViewController.gameNames = results.compactMap { $0.name }
                         GameNameID.dict = Dictionary(uniqueKeysWithValues: results.compactMap { ($0.name ?? "", $0.id ?? 0) })
                         self.delegate?.reloadGamesCollectionView()
                         self.delegate?.reloadSliderCollectionView()

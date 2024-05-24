@@ -39,6 +39,9 @@
 		DD7E2CCB2BFEAB3800ECAAFB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CCA2BFEAB3800ECAAFB /* GradientExtension.swift */; };
 		DD7E2CCE2BFEB12F00ECAAFB /* GeminiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CCD2BFEB12F00ECAAFB /* GeminiViewController.swift */; };
 		DD7E2CD02BFFC65700ECAAFB /* GameNameID.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CCF2BFFC65700ECAAFB /* GameNameID.swift */; };
+		DD7E2CD22C000AA800ECAAFB /* GeminiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CD12C000AA800ECAAFB /* GeminiViewModel.swift */; };
+		DD7E2CD62C00127700ECAAFB /* GenresCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7E2CD42C00127700ECAAFB /* GenresCell.swift */; };
+		DD7E2CD72C00127700ECAAFB /* GenresCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7E2CD52C00127700ECAAFB /* GenresCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +76,9 @@
 		DD7E2CCA2BFEAB3800ECAAFB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 		DD7E2CCD2BFEB12F00ECAAFB /* GeminiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiViewController.swift; sourceTree = "<group>"; };
 		DD7E2CCF2BFFC65700ECAAFB /* GameNameID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNameID.swift; sourceTree = "<group>"; };
+		DD7E2CD12C000AA800ECAAFB /* GeminiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiViewModel.swift; sourceTree = "<group>"; };
+		DD7E2CD42C00127700ECAAFB /* GenresCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresCell.swift; sourceTree = "<group>"; };
+		DD7E2CD52C00127700ECAAFB /* GenresCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenresCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,9 +247,20 @@
 		DD7E2CCC2BFEB11400ECAAFB /* Gemini */ = {
 			isa = PBXGroup;
 			children = (
+				DD7E2CD32C00125E00ECAAFB /* Cell */,
 				DD7E2CCD2BFEB12F00ECAAFB /* GeminiViewController.swift */,
+				DD7E2CD12C000AA800ECAAFB /* GeminiViewModel.swift */,
 			);
 			path = Gemini;
+			sourceTree = "<group>";
+		};
+		DD7E2CD32C00125E00ECAAFB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD7E2CD42C00127700ECAAFB /* GenresCell.swift */,
+				DD7E2CD52C00127700ECAAFB /* GenresCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +333,7 @@
 				DD66512A2BF92E3800E4FA4A /* OldGameFatty.ttf in Resources */,
 				DD6650FE2BF7F60C00E4FA4A /* Assets.xcassets in Resources */,
 				DD6651012BF7F60C00E4FA4A /* Base in Resources */,
+				DD7E2CD72C00127700ECAAFB /* GenresCell.xib in Resources */,
 				DD66514F2BFC048800E4FA4A /* SliderCell.xib in Resources */,
 				DD6650F92BF7F60A00E4FA4A /* Base in Resources */,
 				DD66513D2BF9485C00E4FA4A /* PermanentMarker-Regular.ttf in Resources */,
@@ -342,6 +360,7 @@
 				DD66514C2BFBE33200E4FA4A /* AlertExtension.swift in Sources */,
 				DD6651502BFC048800E4FA4A /* SliderCell.swift in Sources */,
 				DD66511E2BF910B000E4FA4A /* ColorExtension.swift in Sources */,
+				DD7E2CD22C000AA800ECAAFB /* GeminiViewModel.swift in Sources */,
 				DD7E2CC22BFE7DC200ECAAFB /* FavoritesViewModel.swift in Sources */,
 				DD6650F42BF7F60A00E4FA4A /* SceneDelegate.swift in Sources */,
 				DD6650FC2BF7F60A00E4FA4A /* GameList.xcdatamodeld in Sources */,
@@ -352,6 +371,7 @@
 				DD19182B2BFC18ED00CEAB6F /* DetailViewController.swift in Sources */,
 				DD7E2CC72BFE84A500ECAAFB /* CoreDataManager.swift in Sources */,
 				DD7E2CBE2BFCED4A00ECAAFB /* DetailViewModel.swift in Sources */,
+				DD7E2CD62C00127700ECAAFB /* GenresCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

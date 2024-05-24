@@ -29,6 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         favoritesViewController.favoritesViewModel = favoritesViewModel
 
         guard let geminiViewController = storyboard.instantiateViewController(withIdentifier: "GeminiViewController") as? GeminiViewController else { return }
+        let geminiViewModel = GeminiViewModel()
+        geminiViewController.viewModel = geminiViewModel
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [homeViewController, favoritesViewController, geminiViewController]
