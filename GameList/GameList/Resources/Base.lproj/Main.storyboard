@@ -368,10 +368,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C4s-5s-WHv">
-                                <rect key="frame" x="8" y="59" width="414" height="430"/>
+                                <rect key="frame" x="16" y="59" width="398" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="430" id="df0-AD-bFk"/>
+                                    <constraint firstAttribute="height" constant="300" id="df0-AD-bFk"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ef7-ie-zzY">
                                     <size key="itemSize" width="128" height="128"/>
@@ -382,26 +382,38 @@
                                 <cells/>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQ3-Ik-qcq">
-                                <rect key="frame" x="136.33333333333331" y="822" width="157.33333333333331" height="35"/>
+                                <rect key="frame" x="136.33333333333331" y="798" width="157.33333333333331" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Get Suggestion">
                                     <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="getSuggestionBtnClicked:" destination="PtO-2g-BAM" eventType="touchUpInside" id="zTz-nd-4Cw"/>
+                                </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JbQ-bQ-7Ib">
+                                <rect key="frame" x="16" y="375" width="398" height="407"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XZ7-Yc-ra5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="HQ3-Ik-qcq" firstAttribute="top" secondItem="JbQ-bQ-7Ib" secondAttribute="bottom" constant="16" id="3QO-ok-Ypg"/>
                             <constraint firstItem="HQ3-Ik-qcq" firstAttribute="centerX" secondItem="Xub-Ue-S26" secondAttribute="centerX" id="A9l-rc-nNl"/>
-                            <constraint firstItem="C4s-5s-WHv" firstAttribute="leading" secondItem="XZ7-Yc-ra5" secondAttribute="leading" constant="8" id="JmK-pX-gHK"/>
-                            <constraint firstItem="XZ7-Yc-ra5" firstAttribute="trailing" secondItem="C4s-5s-WHv" secondAttribute="trailing" constant="8" id="Obv-0J-idg"/>
+                            <constraint firstItem="C4s-5s-WHv" firstAttribute="leading" secondItem="XZ7-Yc-ra5" secondAttribute="leading" constant="16" id="JmK-pX-gHK"/>
+                            <constraint firstItem="XZ7-Yc-ra5" firstAttribute="trailing" secondItem="C4s-5s-WHv" secondAttribute="trailing" constant="16" id="Obv-0J-idg"/>
+                            <constraint firstItem="XZ7-Yc-ra5" firstAttribute="trailing" secondItem="JbQ-bQ-7Ib" secondAttribute="trailing" constant="16" id="aMt-eC-QGQ"/>
+                            <constraint firstItem="JbQ-bQ-7Ib" firstAttribute="top" secondItem="C4s-5s-WHv" secondAttribute="bottom" constant="16" id="am0-bu-d5h"/>
                             <constraint firstItem="C4s-5s-WHv" firstAttribute="top" secondItem="XZ7-Yc-ra5" secondAttribute="top" id="b0I-DB-kDC"/>
-                            <constraint firstItem="HQ3-Ik-qcq" firstAttribute="bottom" secondItem="XZ7-Yc-ra5" secondAttribute="bottom" constant="8" id="oDz-Oc-4if"/>
+                            <constraint firstItem="XZ7-Yc-ra5" firstAttribute="bottom" secondItem="HQ3-Ik-qcq" secondAttribute="bottom" constant="16" id="m7v-1g-mg2"/>
+                            <constraint firstItem="JbQ-bQ-7Ib" firstAttribute="leading" secondItem="XZ7-Yc-ra5" secondAttribute="leading" constant="16" id="yu8-i9-9yr"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Gemini AI" image="ai" id="Zn8-gE-O09"/>
                     <connections>
                         <outlet property="collectionView" destination="C4s-5s-WHv" id="v3z-gN-fx5"/>
+                        <outlet property="collectionViewHeightConstraint" destination="df0-AD-bFk" id="aLl-2L-KTd"/>
+                        <outlet property="imageView" destination="JbQ-bQ-7Ib" id="KmE-bx-jWx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xiS-sc-0S3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

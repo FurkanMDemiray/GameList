@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct GameNameID{
-    static var dict = [String:Int]()
+struct GameNameID {
+    static var dict = [String: Int]()
+    static var imageUrls = [String: String]()
 }

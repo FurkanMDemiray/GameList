@@ -78,8 +78,10 @@ final class DetailViewController: UIViewController {
     }
 
     private func configureNoDataLabel(_ message: String = "Loading...") {
-        noDataLabel.frame = view.bounds
-        view.addSubview(noDataLabel)
+        DispatchQueue.main.async {
+            self.noDataLabel.frame = self.view.bounds
+            self.view.addSubview(self.noDataLabel)
+        }
     }
 
     private func configureDescriptionLabel() {

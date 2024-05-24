@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 class GeminiViewController: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
-    let genres = ["Action", "RPG", "Chill", "TPS", "Multiplayer", "Platform", "Story", "Co-Op", "Puzzle", "Shooter", "Looter", "2D"]
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
 
     var viewModel: GeminiViewModelProtocol! {
         didSet {
@@ -19,59 +21,101 @@ class GeminiViewController: UIViewController {
     }
     private var selectedIndexPaths: [IndexPath] = []
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         view.addGradient()
-        viewModel.getResponse()
         configureCollectionView()
+        configureImageView()
+
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateCollectionViewHeight()
+    }
+
+//MARK: - Configure
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "GenresCell", bundle: nil), forCellWithReuseIdentifier: "GenresCell")
     }
-}
 
-extension GeminiViewController: GeminiViewModelDelegate {
-    func printResponse() {
+    private func configureImageView() {
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
+    }
+
+    private func updateCollectionViewHeight() {
+        let collectionViewWidth = collectionView.frame.size.width
+        let collectionViewHeight = viewModel.getCollectionViewHeight(width: collectionViewWidth, itemCount: viewModel.getGenres().count)
+        collectionViewHeightConstraint.constant = collectionViewHeight - 14
+    }
+
+//MARK: - Get Image
+    private func getImage() {
+        DispatchQueue.main.async {
+            let url = self.viewModel.getImageUrl()
+            self.imageView.sd_imageIndicator = nil
+            self.imageView.sd_setImage(with: URL(string: url))
+        }
+    }
+
+//MARK: - Actions
+    @IBAction func getSuggestionBtnClicked(_ sender: Any) {
+        guard let _ = viewModel.getFeatures().first else {
+            showAlert(title: "Warning", message: "Please select at least one feature to get a suggestion.")
+            return
+        }
+        viewModel.getResponse(features: viewModel.getFeatures())
+        viewModel.clearFeatures()
+        selectedIndexPaths.removeAll()
+        collectionView.reloadData()
 
     }
 }
 
+extension GeminiViewController: GeminiViewModelDelegate {
+    func didReceiveResponse() {
+        getImage()
+    }
+}
+
+// MARK: - CollectionView
 extension GeminiViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return genres.count
+        return viewModel.getGenres().count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GenresCell", for: indexPath) as! GenresCell
-        cell.setGenre(genres[indexPath.row])
+        cell.setGenre(viewModel.getGenres()[indexPath.row])
 
-        // Update cell appearance based on selection
         if selectedIndexPaths.contains(indexPath) {
             cell.cellView.backgroundColor = UIColor(hex: "#1ECBE1")
-        } else {
-            cell.cellView.backgroundColor = .systemRed // or the default background color
         }
-
+        else {
+            cell.cellView.backgroundColor = .systemRed
+        }
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Check if the cell is already selected
+
         if let index = selectedIndexPaths.firstIndex(of: indexPath) {
-            // If selected, deselect it
             selectedIndexPaths.remove(at: index)
-        } else {
-            // If not selected, add it to the selected indices
-            selectedIndexPaths.append(indexPath)
+            viewModel.removeFeature(viewModel.getGenres()[indexPath.row])
         }
-        // Reload the collection view to reflect changes
+        else {
+            selectedIndexPaths.append(indexPath)
+            viewModel.addFeature(viewModel.getGenres()[indexPath.row])
+        }
         collectionView.reloadData()
     }
 }
 
+// MARK: - CollectionViewFlowLayout
 extension GeminiViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = viewModel.getCellWidhtHeight(collectionView.frame.size.width)
