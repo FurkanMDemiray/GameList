@@ -24,6 +24,7 @@ protocol GeminiViewModelProtocol {
     func clearFeatures()
     func getImageUrl() -> String
     func getCollectionViewHeight(width: CGFloat, itemCount: Int) -> CGFloat
+    func getGameName() -> String
 }
 
 final class GeminiViewModel {
@@ -60,6 +61,10 @@ final class GeminiViewModel {
 }
 
 extension GeminiViewModel: GeminiViewModelProtocol {
+
+    func getGameName() -> String {
+        responseGame
+    }
 
     func getCollectionViewHeight(width: CGFloat, itemCount: Int) -> CGFloat {
         let padding: CGFloat = 10

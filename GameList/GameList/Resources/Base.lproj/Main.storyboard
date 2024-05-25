@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rl-Sw-LXE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2925" y="-809"/>
+            <point key="canvasLocation" x="2964" y="-144"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="AKA-2D-nyh">
@@ -359,7 +359,7 @@
             </objects>
             <point key="canvasLocation" x="2068" y="-144"/>
         </scene>
-        <!--Gemini AI-->
+        <!--AI-->
         <scene sceneID="oVT-Gs-ZmU">
             <objects>
                 <viewController storyboardIdentifier="GeminiViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PtO-2g-BAM" customClass="GeminiViewController" customModule="GameList" customModuleProvider="target" sceneMemberID="viewController">
@@ -409,11 +409,12 @@
                             <constraint firstItem="JbQ-bQ-7Ib" firstAttribute="leading" secondItem="XZ7-Yc-ra5" secondAttribute="leading" constant="16" id="yu8-i9-9yr"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Gemini AI" image="ai" id="Zn8-gE-O09"/>
+                    <tabBarItem key="tabBarItem" title="AI" image="ai" id="Zn8-gE-O09"/>
                     <connections>
                         <outlet property="collectionView" destination="C4s-5s-WHv" id="v3z-gN-fx5"/>
                         <outlet property="collectionViewHeightConstraint" destination="df0-AD-bFk" id="aLl-2L-KTd"/>
                         <outlet property="imageView" destination="JbQ-bQ-7Ib" id="KmE-bx-jWx"/>
+                        <segue destination="EfS-pH-B8u" kind="presentation" identifier="aiToDetail" modalPresentationStyle="fullScreen" id="eA5-JC-u1Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xiS-sc-0S3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -443,7 +444,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="05E-w8-Ksb"/>
+        <segue reference="eA5-JC-u1Y"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ai" width="32" height="32"/>

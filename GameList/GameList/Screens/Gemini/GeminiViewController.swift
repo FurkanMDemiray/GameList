@@ -42,6 +42,9 @@ class GeminiViewController: UIViewController {
     }
 
     private func configureImageView() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(toDetailView))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(gesture)
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
@@ -72,8 +75,19 @@ class GeminiViewController: UIViewController {
         viewModel.clearFeatures()
         selectedIndexPaths.removeAll()
         collectionView.reloadData()
-
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "aiToDetail" {
+            let destinationVC = segue.destination as! DetailViewController
+            destinationVC.detailViewModel = DetailViewModel(gameID: GameNameID.dict[viewModel.getGameName()]!)
+        }
+    }
+
+    @objc private func toDetailView() {
+        performSegue(withIdentifier: "aiToDetail", sender: nil)
+    }
+
 }
 
 extension GeminiViewController: GeminiViewModelDelegate {
