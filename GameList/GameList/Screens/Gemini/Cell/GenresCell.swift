@@ -26,8 +26,9 @@ class GenresCell: UICollectionViewCell {
     }
 
     private func configureLabel() {
+        let screenWidth = UIScreen.main.bounds.width
         genreLabel.textColor = .white
-        genreLabel.font = UIFont(name: "OldGameFatty", size: 14)
+        screenWidth > 375 ? (genreLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)) : (genreLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold))
     }
 
     func setGenre(_ genre: String) {

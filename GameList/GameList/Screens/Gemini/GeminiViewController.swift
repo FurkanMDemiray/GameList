@@ -93,10 +93,10 @@ extension GeminiViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.setGenre(viewModel.getGenres()[indexPath.row])
 
         if selectedIndexPaths.contains(indexPath) {
-            cell.cellView.backgroundColor = UIColor(hex: "#1ECBE1")
+            cell.cellView.backgroundColor = UIColor(hex: "10439F")
         }
         else {
-            cell.cellView.backgroundColor = .systemRed
+            cell.cellView.backgroundColor = UIColor(hex: "454545")
         }
         return cell
     }
