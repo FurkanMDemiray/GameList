@@ -33,7 +33,7 @@ struct DetailModel: Decodable {
     let alternativeNames: [String]?
     let metacriticURL: String?
     let parentsCount, additionsCount, gameSeriesCount: Int?
-    let userGame: JSONNull?
+    let userGame: String?
     let reviewsCount: Int?
     let saturatedColor, dominantColor: String?
     let parentPlatforms: [ParentPlatform]?
@@ -41,7 +41,7 @@ struct DetailModel: Decodable {
     let stores: [Store]?
     let developers, genres, tags, publishers: [Developer]?
     let esrbRating: EsrbRating?
-    let clip: JSONNull?
+    let clip: String?
     let descriptionRaw: String?
 
     enum CodingKeys: String, CodingKey {

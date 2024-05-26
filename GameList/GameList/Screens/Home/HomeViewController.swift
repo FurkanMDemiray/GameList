@@ -1,4 +1,12 @@
+//
+//  HomeViewController.swift
+//  GameList
+//
+//  Created by Melik Demiray on 20.05.2024.
+//
+
 import UIKit
+import SDWebImage
 
 final class HomeViewController: UIViewController {
 
@@ -27,6 +35,7 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 500 // 500 MB
         self.setConfigures()
         self.homeViewModel.load()
     }
@@ -110,6 +119,13 @@ final class HomeViewController: UIViewController {
         if scrollView == sliderCollectionView {
             let page = scrollView.contentOffset.x / scrollView.frame.width
             pageControl.currentPage = Int(page)
+        }
+        else if scrollView == tableView {
+            let offsetY = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            if offsetY > contentHeight - scrollView.frame.height * 4 {
+                homeViewModel.loadMoreGames()
+            }
         }
     }
 
@@ -219,7 +235,7 @@ extension HomeViewController: HomeViewModelDelegate {
         }
     }
 
-    func reloadGamesCollectionView() {
+    func reloadGamesTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
