@@ -188,6 +188,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 
 // MARK: - ViewModelDelegate
 extension HomeViewController: HomeViewModelDelegate {
+
     func showNoData() {
         configureNoDataLabel("No data found.")
     }

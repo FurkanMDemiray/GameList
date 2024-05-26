@@ -26,7 +26,6 @@ protocol HomeViewModelProtocol {
 
     func load()
     func loadMoreGames()
-    func getGameModel() -> GameModel?
     func getResults() -> [Results]
     func getFirstThreeImages() -> [String]
     func searchGames(with text: String)
@@ -36,7 +35,6 @@ protocol HomeViewModelProtocol {
 final class HomeViewModel {
 
     weak var delegate: HomeViewModelDelegate?
-    var game: GameModel?
     var results = [Results]()
     var originalResults = [Results]()
     var imagesURL = [String]()
@@ -51,30 +49,26 @@ final class HomeViewModel {
             switch result {
             case .success(let game):
                 DispatchQueue.main.async {
-                    self.game = game
-                    self.nextPageURL = game.next // Update nextPageURL
+                    self.nextPageURL = game.next
                     if let newResults = game.results {
                         // Append new results only if they are not already present
                         let existingIds = Set(self.results.map { $0.id })
                         let uniqueNewResults = newResults.filter { !existingIds.contains($0.id) }
                         self.results.append(contentsOf: uniqueNewResults)
                         self.originalResults.append(contentsOf: uniqueNewResults)
-
                         self.imagesURL.append(contentsOf: uniqueNewResults.compactMap { $0.backgroundImage })
-                        var imageUrlsDict = [String: [String]]()
 
-                        for result in self.results {
-                            if let name = result.name, let imageUrl = result.backgroundImage {
-                                if imageUrlsDict[name] != nil {
-                                    imageUrlsDict[name]?.append(imageUrl)
-                                } else {
-                                    imageUrlsDict[name] = [imageUrl]
-                                }
-                            }
-                        }
+                        // Remove duplicates from dictionarys
+                        let uniqueResults = Array(Set(self.results.compactMap { $0.name }))
+                        GameNameID.imageUrls = Dictionary(uniqueKeysWithValues: uniqueResults.compactMap { name in
+                            guard let result = self.results.first(where: { $0.name == name }) else { return nil }
+                            return (name, result.backgroundImage ?? "")
+                        })
 
-                        GameNameID.imageUrls = imageUrlsDict.mapValues { $0.first ?? "" }
-                        GameNameID.gameNameIdDict = Dictionary(uniqueKeysWithValues: self.results.compactMap { ($0.name ?? "", $0.id ?? 0) })
+                        GameNameID.gameNameIdDict = Dictionary(uniqueKeysWithValues: uniqueResults.compactMap { name in
+                            guard let result = self.results.first(where: { $0.name == name }) else { return nil }
+                            return (name, result.id ?? 0)
+                        })
 
                         self.delegate?.reloadGamesTableView()
                         self.delegate?.reloadSliderCollectionView()
@@ -89,7 +83,7 @@ final class HomeViewModel {
         }
     }
 
-// MARK: - Remove Duplicates
+// MARK: - Remove Duplicates From Results
     fileprivate func removeDuplicates(_ results: inout [Results]) {
         var uniqueResults = [Results]()
         var seenIds = Set<Int>()
@@ -120,7 +114,6 @@ extension HomeViewModel: HomeViewModelProtocol {
             let filteredResults = originalResults.filter {
                 $0.name?.lowercased().contains(text.lowercased()) ?? false
             }
-            print("Filtered Results: ", filteredResults)
             delegate?.hideSlider()
             results = filteredResults
         } else {
@@ -140,10 +133,6 @@ extension HomeViewModel: HomeViewModelProtocol {
 
     func loadMoreGames() {
         fetchGames(from: nextPageURL)
-    }
-
-    func getGameModel() -> GameModel? {
-        game
     }
 
     func getResults() -> [Results] {

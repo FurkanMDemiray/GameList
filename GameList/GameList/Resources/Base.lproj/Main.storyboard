@@ -174,7 +174,7 @@
                                 <rect key="frame" x="0.0" y="316" width="430" height="616"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-L9-y5A">
-                                        <rect key="frame" x="0.0" y="0.0" width="430" height="1200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Game" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9N-x2-2e4">
                                                 <rect key="frame" x="16" y="16" width="398" height="28.666666666666671"/>
@@ -204,7 +204,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Platforms: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEx-id-1RO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="32"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -247,14 +247,14 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.metacritic.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dx1-Wj-Vv7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="32"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                 <color key="textColor" systemColor="systemBlueColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.reddit.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nSp-nU-Kn5">
                                                                 <rect key="frame" x="156" y="0.0" width="144" height="32"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                 <color key="textColor" systemColor="systemBlueColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -274,7 +274,7 @@
                                             <constraint firstItem="SR1-TX-1mX" firstAttribute="top" secondItem="J5t-qp-lNl" secondAttribute="bottom" constant="72" id="bbL-AG-UQq"/>
                                             <constraint firstAttribute="trailing" secondItem="U9N-x2-2e4" secondAttribute="trailing" constant="16" id="eAx-jJ-Sp3"/>
                                             <constraint firstItem="U9N-x2-2e4" firstAttribute="top" secondItem="sBB-L9-y5A" secondAttribute="top" constant="16" id="iS1-XW-swF"/>
-                                            <constraint firstAttribute="height" constant="1200" id="tgT-ux-L34"/>
+                                            <constraint firstAttribute="height" constant="1000" id="tgT-ux-L34"/>
                                         </constraints>
                                     </view>
                                 </subviews>

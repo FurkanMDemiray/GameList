@@ -56,7 +56,7 @@ final class GeminiViewModel {
             let response = try await model.generateContent(prompt)
             if let text = response.text {
                 self.responseGame = text
-                print(text)
+                print(responseGame)
                 delegate?.didReceiveResponse()
             }
         } catch {
@@ -107,7 +107,6 @@ extension GeminiViewModel: GeminiViewModelProtocol {
 
     func addFeature(_ feature: String) {
         features.append(feature)
-        print(features)
     }
 
     func getGenres() -> [String] {

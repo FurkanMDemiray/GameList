@@ -28,7 +28,6 @@ class GeminiViewController: UIViewController {
         view.addGradient()
         configureCollectionView()
         configureImageView()
-
     }
 
     override func viewDidLayoutSubviews() {
