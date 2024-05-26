@@ -78,7 +78,7 @@ Also, make sure that these dependencies are added in your project's target:
 
 1. Open the app on your simulator or device.
 2. Browse and analyse the games.
-3. Navigate to game Detail by tapping on the relevant coin.
+3. Navigate to game detail by tapping on the relevant game image.
 
  <p align="left">
   <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/1.gif" alt="Listing" width="200" height="400">
@@ -127,5 +127,3 @@ Also, make sure that these dependencies are added in your project's target:
 ## Improvements
 - More content can be added to the detail view.
 - Localization for other languages can be added to be able to reach more user.
-
- 
