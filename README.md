@@ -81,7 +81,7 @@ Also, make sure that these dependencies are added in your project's target:
 3. Navigate to game Detail by tapping on the relevant coin.
 
  <p align="left">
-  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/1.gif" alt="Listing" width="200" height="400">It is a simple application where you can view the names, release dates, and ratings of the games.
+  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/1.gif" alt="Listing" width="200" height="400">
 </p>
 
 ---
@@ -114,7 +114,7 @@ Also, make sure that these dependencies are added in your project's target:
 
 ## Suggestion From AI
 
-1. Navigate to ai screen select some features and after that click to the get suggestion button to get suggestion.
+1. Navigate to ai screen select some features and after that click to the get suggestion button to get suggestions.
 
 <p align="left">
   <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/5.gif" alt="Listing" width="200" height="400">
