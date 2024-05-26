@@ -33,6 +33,12 @@ final class HomeViewController: UIViewController {
 
 //MARK: - Configure
     private func configureCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+
+        sliderCollectionView.setCollectionViewLayout(layout, animated: false)
+        sliderCollectionView.isPagingEnabled = true
         sliderCollectionView.dataSource = self
         sliderCollectionView.delegate = self
         sliderCollectionView.showsHorizontalScrollIndicator = false
@@ -106,6 +112,18 @@ final class HomeViewController: UIViewController {
             pageControl.currentPage = Int(page)
         }
     }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let layout = sliderCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+
+        var offset = targetContentOffset.pointee
+        let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+        let roundedIndex = round(index)
+
+        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+        targetContentOffset.pointee = offset
+    }
 }
 
 //MARK: - CollectionView
@@ -121,6 +139,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.configure(with: homeViewModel.getFirstThreeImages()[indexPath.row])
         }
         return cell
+    }
+}
+
+//MARK: - CollectionView FlowLayout
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
 }
 
