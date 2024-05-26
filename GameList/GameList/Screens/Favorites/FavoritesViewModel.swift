@@ -59,7 +59,7 @@ final class FavoritesViewModel {
 extension FavoritesViewModel: FavoritesViewModelProtocol {
 
     func getGameID(name: String) -> Int {
-        for (key, value) in GameNameID.dict {
+        for (key, value) in GameNameID.gameNameIdDict {
             if key == name {
                 return value
             }

@@ -10,6 +10,7 @@ import SDWebImage
 
 class GeminiViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
@@ -21,6 +22,7 @@ class GeminiViewController: UIViewController {
     }
     private var selectedIndexPaths: [IndexPath] = []
 
+//MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.addGradient()
@@ -60,7 +62,6 @@ class GeminiViewController: UIViewController {
     private func getImage() {
         DispatchQueue.main.async {
             let url = self.viewModel.getImageUrl()
-            self.imageView.sd_imageIndicator = nil
             self.imageView.sd_setImage(with: URL(string: url))
         }
     }
@@ -71,6 +72,7 @@ class GeminiViewController: UIViewController {
             showAlert(title: "Warning", message: "Please select at least one feature to get a suggestion.")
             return
         }
+        imageView.image = nil
         viewModel.getResponse(features: viewModel.getFeatures())
         viewModel.clearFeatures()
         selectedIndexPaths.removeAll()
@@ -80,17 +82,35 @@ class GeminiViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "aiToDetail" {
             let destinationVC = segue.destination as! DetailViewController
-            destinationVC.detailViewModel = DetailViewModel(gameID: GameNameID.dict[viewModel.getGameName()]!)
+            destinationVC.detailViewModel = DetailViewModel(gameID: GameNameID.gameNameIdDict[viewModel.getGameName()]!)
         }
     }
 
     @objc private func toDetailView() {
+        if imageView.image == nil {
+            showAlert(title: "Warning", message: "Please get a suggestion first.")
+            return
+        }
         performSegue(withIdentifier: "aiToDetail", sender: nil)
     }
 
 }
 
+// MARK: - ViewModel Delegate
 extension GeminiViewController: GeminiViewModelDelegate {
+    func showIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+        }
+    }
+
+    func hideIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
+    }
+
     func didReceiveResponse() {
         getImage()
     }

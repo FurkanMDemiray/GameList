@@ -17,7 +17,7 @@ class GenresCell: UICollectionViewCell {
         configureCell()
         configureLabel()
         self.backgroundColor = .clear
-        
+
     }
 
     private func configureCell() {

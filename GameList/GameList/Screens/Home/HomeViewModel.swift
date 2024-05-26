@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Delegate
 protocol HomeViewModelDelegate: AnyObject {
     func reloadGamesCollectionView()
     func reloadSliderCollectionView()
@@ -18,6 +19,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func showNoData()
 }
 
+// MARK: - Protocol
 protocol HomeViewModelProtocol {
     var delegate: HomeViewModelDelegate? { get set }
     var numberOfGames: Int { get }
@@ -37,6 +39,7 @@ final class HomeViewModel {
     var results = [Results]()
     var imagesURL = [String]()
 
+// MARK: - Fetch Games
     fileprivate func fetchGames() {
         self.delegate?.showLoading()
         NetworkManager.shared.fetch(from: Constants.baseUrl, as: GameModel.self) { [weak self] result in
@@ -49,7 +52,7 @@ final class HomeViewModel {
                         self.results = results
                         self.imagesURL = results.compactMap { $0.backgroundImage }
                         GameNameID.imageUrls = Dictionary(uniqueKeysWithValues: results.compactMap { ($0.name ?? "", $0.backgroundImage ?? "") })
-                        GameNameID.dict = Dictionary(uniqueKeysWithValues: results.compactMap { ($0.name ?? "", $0.id ?? 0) })
+                        GameNameID.gameNameIdDict = Dictionary(uniqueKeysWithValues: results.compactMap { ($0.name ?? "", $0.id ?? 0) })
                         self.delegate?.reloadGamesCollectionView()
                         self.delegate?.reloadSliderCollectionView()
                         self.delegate?.showPageControl()
@@ -64,6 +67,7 @@ final class HomeViewModel {
     }
 }
 
+// MARK: - HomeViewModelProtocol
 extension HomeViewModel: HomeViewModelProtocol {
     func getGameId(at index: Int) -> Int {
         results[index].id ?? 0

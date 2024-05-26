@@ -394,23 +394,29 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JbQ-bQ-7Ib">
                                 <rect key="frame" x="16" y="375" width="398" height="407"/>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="r5b-Rd-BI4">
+                                <rect key="frame" x="205" y="568.66666666666663" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XZ7-Yc-ra5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HQ3-Ik-qcq" firstAttribute="top" secondItem="JbQ-bQ-7Ib" secondAttribute="bottom" constant="16" id="3QO-ok-Ypg"/>
                             <constraint firstItem="HQ3-Ik-qcq" firstAttribute="centerX" secondItem="Xub-Ue-S26" secondAttribute="centerX" id="A9l-rc-nNl"/>
+                            <constraint firstItem="r5b-Rd-BI4" firstAttribute="centerY" secondItem="JbQ-bQ-7Ib" secondAttribute="centerY" id="CN9-1d-3u5"/>
                             <constraint firstItem="C4s-5s-WHv" firstAttribute="leading" secondItem="XZ7-Yc-ra5" secondAttribute="leading" constant="16" id="JmK-pX-gHK"/>
                             <constraint firstItem="XZ7-Yc-ra5" firstAttribute="trailing" secondItem="C4s-5s-WHv" secondAttribute="trailing" constant="16" id="Obv-0J-idg"/>
                             <constraint firstItem="XZ7-Yc-ra5" firstAttribute="trailing" secondItem="JbQ-bQ-7Ib" secondAttribute="trailing" constant="16" id="aMt-eC-QGQ"/>
                             <constraint firstItem="JbQ-bQ-7Ib" firstAttribute="top" secondItem="C4s-5s-WHv" secondAttribute="bottom" constant="16" id="am0-bu-d5h"/>
                             <constraint firstItem="C4s-5s-WHv" firstAttribute="top" secondItem="XZ7-Yc-ra5" secondAttribute="top" id="b0I-DB-kDC"/>
+                            <constraint firstItem="r5b-Rd-BI4" firstAttribute="centerX" secondItem="JbQ-bQ-7Ib" secondAttribute="centerX" id="jVu-sx-1JW"/>
                             <constraint firstItem="XZ7-Yc-ra5" firstAttribute="bottom" secondItem="HQ3-Ik-qcq" secondAttribute="bottom" constant="16" id="m7v-1g-mg2"/>
                             <constraint firstItem="JbQ-bQ-7Ib" firstAttribute="leading" secondItem="XZ7-Yc-ra5" secondAttribute="leading" constant="16" id="yu8-i9-9yr"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="AI" image="ai" id="Zn8-gE-O09"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="r5b-Rd-BI4" id="mYv-IX-9Cw"/>
                         <outlet property="collectionView" destination="C4s-5s-WHv" id="v3z-gN-fx5"/>
                         <outlet property="collectionViewHeightConstraint" destination="df0-AD-bFk" id="aLl-2L-KTd"/>
                         <outlet property="imageView" destination="JbQ-bQ-7Ib" id="KmE-bx-jWx"/>
@@ -444,7 +450,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eA5-JC-u1Y"/>
+        <segue reference="LXL-hr-gyn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ai" width="32" height="32"/>

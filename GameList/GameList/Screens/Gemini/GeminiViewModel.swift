@@ -8,10 +8,14 @@
 import Foundation
 import GoogleGenerativeAI
 
+// MARK: - Delegate
 protocol GeminiViewModelDelegate: AnyObject {
     func didReceiveResponse()
+    func showIndicator()
+    func hideIndicator()
 }
 
+// MARK: - Protocol
 protocol GeminiViewModelProtocol {
     var delegate: GeminiViewModelDelegate? { get set }
 
@@ -37,29 +41,32 @@ final class GeminiViewModel {
     var responseGame = ""
 
     fileprivate func getNames() {
-        for key in GameNameID.dict.keys {
+        for key in GameNameID.gameNameIdDict.keys {
             names.append(key)
         }
     }
 
+// MARK: - Fetch Response
     fileprivate func fetchResponse(features: [String]) async {
+        delegate?.showIndicator()
         getNames()
         let model = GenerativeModel(name: "gemini-pro", apiKey: Constants.geminiAPIKey)
         let prompt = "Suggest me a only one game according to the this features \(features) I mentioned among the games in this \(names) game list. Just give me the name of the game."
         do {
             let response = try await model.generateContent(prompt)
             if let text = response.text {
-                self.response = text
                 self.responseGame = text
-                self.delegate?.didReceiveResponse()
+                delegate?.didReceiveResponse()
             }
         } catch {
             print(error)
         }
+        delegate?.hideIndicator()
     }
 
 }
 
+// MARK: - GeminiViewModelProtocol
 extension GeminiViewModel: GeminiViewModelProtocol {
 
     func getGameName() -> String {

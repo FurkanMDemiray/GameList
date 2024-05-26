@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  GameList
-//
-//  Created by Melik Demiray on 17.05.2024.
-//
-
 import UIKit
 
 final class HomeViewController: UIViewController {
@@ -34,8 +27,8 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConfigures()
-        homeViewModel.load()
+        self.setConfigures()
+        self.homeViewModel.load()
     }
 
 //MARK: - Configure
@@ -70,16 +63,20 @@ final class HomeViewController: UIViewController {
     }
 
     private func configureNoDataLabel(_ message: String = "Loading...") {
-        view.addSubview(notFoundLabel)
-        notFoundLabel.text = message
-        NSLayoutConstraint.activate([
-            notFoundLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            notFoundLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        DispatchQueue.main.async {
+            self.view.addSubview(self.notFoundLabel)
+            self.notFoundLabel.text = message
+            NSLayoutConstraint.activate([
+                self.notFoundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                self.notFoundLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+                ])
+        }
     }
 
     private func hidePageControl() {
-        pageControl.isHidden = true
+        DispatchQueue.main.async {
+            self.pageControl.isHidden = true
+        }
     }
 
     private func setConfigures() {
@@ -151,47 +148,60 @@ extension HomeViewController: HomeViewModelDelegate {
     func showNoData() {
         configureNoDataLabel("No data found.")
     }
-    
+
     func showLoading() {
         configureNoDataLabel("Loading...")
     }
-    
+
     func hideLoading() {
-        notFoundLabel.isHidden = true
+        DispatchQueue.main.async {
+            self.notFoundLabel.isHidden = true
+        }
     }
-    
+
     func showPageControl() {
-        pageControl.isHidden = false
+        DispatchQueue.main.async {
+            self.pageControl.isHidden = false
+        }
     }
 
     func showSlider() {
-        if tableViewTopConstraint != nil {
-            tableViewTopConstraint.isActive = false
-        }
-        tableViewTopConstraint = tableView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 8)
-        tableViewTopConstraint.isActive = true
+        DispatchQueue.main.async {
+            if self.tableViewTopConstraint != nil {
+                self.tableViewTopConstraint.isActive = false
+            }
+            self.tableViewTopConstraint = self.tableView.topAnchor.constraint(equalTo: self.pageControl.bottomAnchor, constant: 8)
+            self.tableViewTopConstraint.isActive = true
 
-        sliderCollectionView.isHidden = false
-        pageControl.isHidden = false
+            self.sliderCollectionView.isHidden = false
+            self.pageControl.isHidden = false
+            self.notFoundLabel.isHidden = true
+        }
     }
 
     func hideSlider() {
-        if tableViewTopConstraint != nil {
-            tableViewTopConstraint.isActive = false
-        }
-        tableViewTopConstraint = tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16)
-        tableViewTopConstraint.isActive = true
+        DispatchQueue.main.async {
+            if self.tableViewTopConstraint != nil {
+                self.tableViewTopConstraint.isActive = false
+            }
+            self.tableViewTopConstraint = self.tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 16)
+            self.tableViewTopConstraint.isActive = true
 
-        sliderCollectionView.isHidden = true
-        pageControl.isHidden = true
+            self.sliderCollectionView.isHidden = true
+            self.pageControl.isHidden = true
+        }
     }
 
     func reloadGamesCollectionView() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
     func reloadSliderCollectionView() {
-        sliderCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.sliderCollectionView.reloadData()
+        }
     }
 }
 
@@ -203,17 +213,20 @@ extension HomeViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             showSlider()
         } else {
-            if homeViewModel.numberOfGames == 0 {
-                notFoundLabel.text = "No game found!"
-                notFoundLabel.isHidden = false
-            } else {
-                notFoundLabel.isHidden = true
+            DispatchQueue.main.async {
+                if self.homeViewModel.numberOfGames == 0 {
+                    self.notFoundLabel.text = "No game found!"
+                    self.notFoundLabel.isHidden = false
+                } else {
+                    self.notFoundLabel.isHidden = true
+                }
             }
         }
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
     }
 }
-
