@@ -81,7 +81,7 @@ Also, make sure that these dependencies are added in your project's target:
 3. Navigate to game Detail by tapping on the relevant coin.
 
  <p align="left">
-  <img src="https://github.com/FurkanMDemiray/TGYCriptoCurrency/blob/main/Gifs/1.gif" alt="Listing" width="200" height="400">It is a simple application where you can view the names, release dates, and ratings of the games.
+  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/1.gif" alt="Listing" width="200" height="400">It is a simple application where you can view the names, release dates, and ratings of the games.
 </p>
 
 ---
@@ -91,7 +91,7 @@ Also, make sure that these dependencies are added in your project's target:
 1. Search games by its name.
 
    <p align="left">
-  <img src="https://github.com/FurkanMDemiray/TGYCriptoCurrency/blob/main/Gifs/2.gif" alt="Listing" width="200" height="400">
+  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/2.gif" alt="Listing" width="200" height="400">
 </p>
 
 ---
@@ -101,7 +101,7 @@ Also, make sure that these dependencies are added in your project's target:
 1. Click to game image to see the detail of the game.
 
 <p align="left">
-  <img src="https://github.com/FurkanMDemiray/TGYCriptoCurrency/blob/main/Gifs/3.gif" alt="Listing" width="200" height="400">
+  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/3.gif" alt="Listing" width="200" height="400">
 </p>
 
 ## Favorites
@@ -109,7 +109,7 @@ Also, make sure that these dependencies are added in your project's target:
 1. Click to heart image on the detail screen to add game to your favorites.
 
 <p align="left">
-  <img src="https://github.com/FurkanMDemiray/TGYCriptoCurrency/blob/main/Gifs/4.gif" alt="Listing" width="200" height="400">
+  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/4.gif" alt="Listing" width="200" height="400">
 </p>
 
 ## Suggestion From AI
@@ -117,7 +117,7 @@ Also, make sure that these dependencies are added in your project's target:
 1. Navigate to ai screen select some features and after that click to the get suggestion button to get suggestion.
 
 <p align="left">
-  <img src="https://github.com/FurkanMDemiray/TGYCriptoCurrency/blob/main/Gifs/5.gif" alt="Listing" width="200" height="400">
+  <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/5.gif" alt="Listing" width="200" height="400">
 </p>
 
 ## Known Issues
