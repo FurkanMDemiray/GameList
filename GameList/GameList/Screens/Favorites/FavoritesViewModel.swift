@@ -63,10 +63,15 @@ final class FavoritesViewModel {
 extension FavoritesViewModel: FavoritesViewModelProtocol {
 
     func getGameID(name: String) -> Int {
-        for (key, value) in GameNameID.gameNameIdDict {
-            if key == name {
-                return value
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGames")
+        request.predicate = NSPredicate(format: "name = %@", name)
+        do {
+            let result = try context.fetch(request)
+            if let gameID = result.first as? NSManagedObject {
+                return gameID.value(forKey: "id") as! Int
             }
+        } catch {
+            print("Error: \(error)")
         }
         return 0
     }

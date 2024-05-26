@@ -56,6 +56,7 @@ final class GeminiViewModel {
             let response = try await model.generateContent(prompt)
             if let text = response.text {
                 self.responseGame = text
+                print(text)
                 delegate?.didReceiveResponse()
             }
         } catch {
@@ -110,8 +111,8 @@ extension GeminiViewModel: GeminiViewModelProtocol {
     }
 
     func getGenres() -> [String] {
-        let genres = ["Action", "RPG", "Chill", "TPS", "Multiplayer", "Platformer", "Story", "Co-Op", "Puzzle", "Shooter", "Looter", "2D"]
-        return genres
+        let features = ["Action", "RPG", "FPS", "TPS", "Multiplayer", "Platformer", "Story", "Co-Op", "Puzzle", "Shooter", "Looter", "MOBA"]
+        return features
     }
 
     func getCellWidhtHeight(_ size: CGFloat) -> CGFloat {

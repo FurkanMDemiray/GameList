@@ -159,6 +159,7 @@ extension DetailViewModel: DetailViewModelProtocol {
             newLikedGame.setValue(metaCritic, forKey: "score")
             newLikedGame.setValue(releaseDate, forKey: "releaseDate")
             newLikedGame.setValue(backgroundImage, forKey: "image")
+            newLikedGame.setValue(gameID, forKey: "id")
             do {
                 try context.save()
                 print("Saved")
