@@ -164,5 +164,3 @@ extension GeminiViewController: UICollectionViewDelegateFlowLayout {
         return 10
     }
 }
-
-

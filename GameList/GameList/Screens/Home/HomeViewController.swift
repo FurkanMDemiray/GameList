@@ -8,6 +8,7 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var sliderCollectionView: UICollectionView!
 
     private var tableViewTopConstraint: NSLayoutConstraint!
+    var gameId: Int?
 
     let notFoundLabel: UILabel = {
         let label = UILabel()
@@ -23,7 +24,6 @@ final class HomeViewController: UIViewController {
             homeViewModel.delegate = self
         }
     }
-    var gameId: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,15 +114,17 @@ final class HomeViewController: UIViewController {
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let layout = sliderCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+        if scrollView == sliderCollectionView {
+            let layout = sliderCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
 
-        var offset = targetContentOffset.pointee
-        let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-        let roundedIndex = round(index)
+            var offset = targetContentOffset.pointee
+            let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+            let roundedIndex = round(index)
 
-        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-        targetContentOffset.pointee = offset
+            offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+            targetContentOffset.pointee = offset
+        }
     }
 }
 

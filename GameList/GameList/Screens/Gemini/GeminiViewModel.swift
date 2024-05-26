@@ -60,6 +60,7 @@ final class GeminiViewModel {
             }
         } catch {
             print(error)
+            delegate?.hideIndicator()
         }
         delegate?.hideIndicator()
     }

@@ -27,6 +27,7 @@ class FavoritesViewController: UIViewController {
         return label
     }()
 
+//MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureColectionView()
@@ -37,6 +38,7 @@ class FavoritesViewController: UIViewController {
         favoritesViewModel.getData()
     }
 
+//MARK: - Configure
     private func configureColectionView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -70,7 +72,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
-            // alert
             let alert = UIAlertController(title: "Are you sure?", message: "Do you want to delete this game from favorites?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
                 completion(false)
@@ -106,7 +107,7 @@ extension FavoritesViewController: FavoritesViewModelDelegate {
 }
 
 // MARK: - Navigation
-extension FavoritesViewController{
+extension FavoritesViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "favoriteToDetail" {
             let destinationVC = segue.destination as! DetailViewController

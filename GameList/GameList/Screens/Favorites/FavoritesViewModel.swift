@@ -8,11 +8,13 @@
 import Foundation
 import CoreData
 
+// MARK: - Delegate
 protocol FavoritesViewModelDelegate: AnyObject {
     func reloadTableView()
     func showNoData()
 }
 
+// MARK: - Protocol
 protocol FavoritesViewModelProtocol {
     var delegate: FavoritesViewModelDelegate? { get set }
 
@@ -33,6 +35,7 @@ final class FavoritesViewModel {
         self.context = context
     }
 
+// MARK: - Fetch Data
     fileprivate func fetchData() {
         self.models.removeAll()
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteGames")
@@ -56,6 +59,7 @@ final class FavoritesViewModel {
 
 }
 
+// MARK: - Protocol Functions
 extension FavoritesViewModel: FavoritesViewModelProtocol {
 
     func getGameID(name: String) -> Int {
