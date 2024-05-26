@@ -38,12 +38,12 @@ Welcome to Game List. A simple game list app that shows games.
 
 | Image 1 | Image 2 | Image 3 |
 |:-------:|:-------:|:-------:|
-| <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/1.gif" width="250"> | <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/2" width="250"> | <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/3" width="250"> |
+| <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/1.gif" width="250"> | <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/2.gif" width="250"> | <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/3.gif" width="250"> |
 | Home | Search | Detail |
 
 | Image 4 | Image 5 |
 |:-------:|:-------:|
- <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/4.gif" width="250"> | <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/5" width="250"> |
+ <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/4.gif" width="250"> | <img src="https://github.com/FurkanMDemiray/GameList/blob/main/Gifs/5.gif" width="250"> |
 | Favorites | AI |
 
 ## Tech Stack
